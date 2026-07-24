@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Roadmap Portal PSE — ACH Colombia</title>
+<style>
+:root {
+  --navy: #0D1B2A;
+  --navy-mid: #112336;
+  --navy-light: #172f45;
+  --blue: #005FA3;
+  --blue-dark: #004A80;
+  --blue-light: #A8C4D8;
+  --blue-pale: #EEF4FB;
+  --white: #ffffff;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+  --text-mid: #cbd5e1;
+  --border: rgba(168,196,216,0.15);
+  --ola0: #37474F;
+  --ola1: #1A56A0;
+  --ola2: #00695C;
+  --ola3: #5B21B6;
+  --ola4: #B45309;
+  --b2c: #1d6fa4;
+  --b2b: #166534;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Calibri', 'Segoe UI', system-ui, sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+.header {
+  position: sticky; top:0; z-index:200;
+  background: var(--navy);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+}
+.header-brand { display:flex; align-items:center; gap:12px; }
+.pse-badge {
+  background: var(--blue); color:white;
+  font-size:11px; font-weight:800; letter-spacing:.12em;
+  padding:5px 10px; border-radius:5px;
+  text-transform:uppercase;
+}
+.header-title { font-size:16px; font-weight:700; }
+.header-sub { font-size:11px; color:var(--blue-light); margin-top:1px; }
+.header-legend { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.leg { display:flex; gap:6px; align-items:center; font-size:11px; color:var(--text-dim); }
+.leg-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+
+/* ── SCROLL WRAPPER ── */
+.board {
+  overflow-x: auto;
+  padding: 20px 24px 40px;
+  scrollbar-width: thin;
+  scrollbar-color: #334155 var(--navy);
+}
+.board::-webkit-scrollbar { height:6px; }
+.board::-webkit-scrollbar-track { background: var(--navy); }
+.board::-webkit-scrollbar-thumb { background: #334155; border-radius:3px; }
+
+/* ── OLA COLUMNS ── */
+.olas-row { display:flex; gap:14px; align-items:flex-start; min-width:max-content; }
+
+.ola-col {
+  width: 272px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  flex-shrink:0;
+  display:flex; flex-direction:column;
+}
+
+.ola-head {
+  padding: 14px 16px 12px;
+  position: relative;
+}
+.ola-eyebrow {
+  font-size:9px; font-weight:800; letter-spacing:.18em;
+  text-transform:uppercase; opacity:.75; margin-bottom:3px;
+}
+.ola-name { font-size:15px; font-weight:800; line-height:1.25; }
+.ola-sub { font-size:11px; opacity:.65; margin-top:2px; }
+.ola-desc {
+  margin-top:8px;
+  font-size:10px;
+  line-height:1.45;
+  color:rgba(255,255,255,0.86);
+}
+.ola-periodo {
+  display:inline-flex; align-items:center; gap:4px;
+  margin-top:8px;
+  font-size:10px; font-weight:600;
+  background: rgba(255,255,255,0.12);
+  padding:3px 9px; border-radius:20px;
+}
+.ola-stretch {
+  display:inline-block;
+  margin-left:6px;
+  font-size:9px; font-weight:700; letter-spacing:.06em;
+  background: rgba(255,255,255,0.15);
+  padding:2px 7px; border-radius:3px;
+  vertical-align:middle;
+}
+
+.ola-body { padding:12px; flex:1; }
+
+/* ── HABILITACIÓN ── */
+.section-label {
+  display:flex; align-items:center; gap:6px;
+  font-size:9px; font-weight:800; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--blue-light);
+  margin-bottom:7px;
+}
+.section-label::after {
+  content:''; flex:1; height:1px;
+  background: var(--border);
+}
+.hab-list { list-style:none; margin-bottom:14px; }
+.hab-item {
+  font-size:11px; color:#6b7f94;
+  padding:4px 22px 4px 13px; position:relative;
+  line-height:1.45;
+  border-bottom:1px solid rgba(255,255,255,0.035);
+}
+.hab-item:last-child { border-bottom:none; }
+.hab-item::before { content:'›'; position:absolute; left:0; color:var(--blue); opacity:.6; }
+.hab-item-text { display:block; }
+.hab-info-btn {
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  border:1px solid rgba(96,165,250,0.4);
+  background:rgba(0,95,163,0.15);
+  color:#93c5fd;
+  font-size:9px;
+  font-weight:800;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  position:absolute;
+  top:4px;
+  right:0;
+  padding:0;
+}
+.hab-info-btn:hover {
+  background:rgba(0,95,163,0.32);
+  border-color:rgba(147,197,253,0.7);
+}
+
+/* ── CU CARDS ── */
+.cu-stack { display:flex; flex-direction:column; gap:5px; }
+
+.cu-card {
+  background: rgba(255,255,255,0.05);
+  border:1px solid rgba(168,196,216,0.1);
+  border-radius:8px; padding:9px 11px;
+  cursor:pointer;
+  transition: background .15s, border-color .15s, transform .15s;
+  display:flex; flex-direction:column; gap:4px;
+}
+.cu-card:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(168,196,216,0.28);
+  transform: translateY(-1px);
+}
+.cu-card.is-active {
+  border-color: var(--blue);
+  background: rgba(0,95,163,0.14);
+}
+.cu-row { display:flex; align-items:flex-start; justify-content:space-between; gap:6px; }
+.cu-name {
+  font-size:9px;
+  font-weight:800;
+  color:#60a5fa;
+  line-height:1.2;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  opacity:.9;
+  flex:1;
+}
+.cu-tags { display:flex; gap:3px; flex-shrink:0; align-items:center; }
+.tag {
+  font-size:9px; font-weight:800; padding:2px 6px;
+  border-radius:3px; letter-spacing:.04em; white-space:nowrap;
+}
+.tag-b2c { background:rgba(29,111,164,0.28); color:#93c5fd; border:1px solid rgba(29,111,164,0.4); }
+.tag-b2b { background:rgba(22,101,52,0.28); color:#86efac; border:1px solid rgba(22,101,52,0.4); }
+.tag-num { background:rgba(255,255,255,0.07); color:#64748b; border:1px solid rgba(255,255,255,0.08); }
+.cu-alcance { font-size:12px; font-weight:500; color:var(--white); line-height:1.5; }
+
+/* ── OVERLAY + PANEL ── */
+.overlay {
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,0.55); z-index:400;
+  backdrop-filter: blur(2px);
+}
+.overlay.on { display:block; }
+
+.panel {
+  position:fixed; top:0; right:-540px; width:520px;
+  height:100vh; overflow-y:auto;
+  background: #0c1e2f;
+  border-left:1px solid rgba(168,196,216,0.18);
+  z-index:500;
+  transition: right .28s cubic-bezier(.4,0,.2,1);
+  display:flex; flex-direction:column;
+}
+.panel.on { right:0; }
+
+.panel-top {
+  padding:20px 22px 16px;
+  border-bottom:1px solid var(--border);
+  position:sticky; top:0;
+  background: #0c1e2f; z-index:10;
+}
+.panel-close {
+  position:absolute; top:16px; right:16px;
+  background:rgba(255,255,255,0.07); border:none;
+  color:var(--text-dim); width:28px; height:28px;
+  border-radius:6px; cursor:pointer; font-size:15px;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .15s;
+}
+.panel-close:hover { background:rgba(255,255,255,0.14); color:white; }
+.panel-num { font-size:10px; font-weight:800; letter-spacing:.18em; color:var(--blue-light); margin-bottom:5px; text-transform:uppercase; }
+.panel-title { font-size:19px; font-weight:800; line-height:1.25; padding-right:36px; margin-bottom:10px; }
+.panel-badges { display:flex; flex-wrap:wrap; gap:5px; align-items:center; }
+.badge {
+  font-size:10px; font-weight:700; padding:3px 8px;
+  border-radius:4px; white-space:nowrap;
+}
+.badge-obj { background:rgba(0,95,163,.2); color:#93c5fd; border:1px solid rgba(0,95,163,.3); }
+.badge-av { background:rgba(255,255,255,.06); color:#64748b; border:1px solid rgba(255,255,255,.09); }
+.badge-val { background:rgba(34,197,94,.1); color:#86efac; border:1px solid rgba(34,197,94,.18); }
+.badge-ing { background:rgba(234,179,8,.1); color:#fde047; border:1px solid rgba(234,179,8,.15); }
+.badge-am { font-weight:800; }
+.am-low { background:rgba(34,197,94,.1); color:#86efac; border:1px solid rgba(34,197,94,.18); }
+.am-mid { background:rgba(234,179,8,.1); color:#fde047; border:1px solid rgba(234,179,8,.15); }
+.am-high { background:rgba(239,68,68,.13); color:#fca5a5; border:1px solid rgba(239,68,68,.2); }
+
+.panel-body { padding:18px 22px 24px; flex:1; }
+.p-section { margin-bottom:18px; }
+.p-stitle {
+  font-size:9px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--blue-light); padding-bottom:6px; margin-bottom:7px;
+  border-bottom:1px solid var(--border);
+}
+.p-desc { font-size:13px; color:var(--text-mid); line-height:1.7; }
+.p-list { list-style:none; }
+.p-list li {
+  font-size:12px; color:var(--text-dim); padding:5px 0 5px 16px;
+  position:relative; line-height:1.5;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.p-list li:last-child { border-bottom:none; }
+.p-list li::before { content:'→'; position:absolute; left:0; color:var(--blue); font-size:11px; }
+.p-grid { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
+.p-stat {
+  background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);
+  border-radius:7px; padding:9px 11px;
+}
+.p-stat-lbl { font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#475569; margin-bottom:3px; }
+.p-stat-val { font-size:13px; font-weight:700; color:white; }
+.p-stat-val.g { color:#4ade80; }
+.p-stat-val.y { color:#fbbf24; }
+.p-threat { height:4px; background:rgba(255,255,255,.08); border-radius:2px; overflow:hidden; margin-top:5px; }
+.p-threat-fill { height:100%; border-radius:2px; }
+.p-alcance-box {
+  background: rgba(0,95,163,.08);
+  border:1px solid rgba(0,95,163,.2);
+  border-radius:8px; padding:10px 13px;
+}
+.p-alcance-lbl { font-size:9px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:#60a5fa; margin-bottom:4px; }
+.p-alcance-txt { font-size:12px; color:#93c5fd; line-height:1.5; }
+.p-mkt-item {
+  font-size:12px; color:var(--text-mid); line-height:1.55;
+  padding:5px 0; border-bottom:1px solid rgba(255,255,255,.05);
+}
+.p-mkt-item:last-child { border-bottom:none; }
+.p-mkt-item strong { color:#60a5fa; }
+.p-comp-chips { display:flex; flex-wrap:wrap; gap:5px; }
+.p-comp-chip {
+  font-size:11px; color:#64748b;
+  background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+  padding:3px 9px; border-radius:20px;
+}
+
+/* ── SCROLL HINT ── */
+.scroll-hint {
+  text-align:center; padding:8px 0;
+  font-size:11px; color:#334155; letter-spacing:.06em;
+}
+
+/* ── VISION SECTION ── */
+.vision {
+  background: linear-gradient(135deg, rgba(13,27,42,0.8), rgba(23,47,69,0.8));
+  border-bottom: 1px solid rgba(168,196,216,0.15);
+  padding: 40px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.vision-content {
+  font-size: 13px;
+  line-height: 1.65;
+  color: #cbd5e1;
+}
+.vision-intro {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+.vision-criteria {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  list-style: none;
+  padding: 0;
+}
+.vision-criteria li {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(168,196,216,0.15);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.vision-criteria li strong {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.3;
+}
+.vision-criteria li span {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #94a3b8;
+  font-weight: 400;
+}
+.vision-footer {
+  margin-top: 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(168,196,216,0.15);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 12px;
+  font-style: italic;
+  color: #60a5fa;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* ── HABILITADOR MODAL ── */
+.hab-modal-overlay {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  z-index:700;
+}
+.hab-modal-overlay.on { display:block; }
+.hab-modal {
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:min(680px, 92vw);
+  max-height:80vh;
+  overflow:auto;
+  background:#0c1e2f;
+  border:1px solid rgba(168,196,216,0.2);
+  border-radius:12px;
+  box-shadow:0 24px 60px rgba(0,0,0,0.45);
+  padding:18px 18px 16px;
+  z-index:710;
+  display:none;
+}
+.hab-modal.on { display:block; }
+.hab-modal-top {
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+.hab-modal-id {
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#60a5fa;
+  font-weight:800;
+}
+.hab-modal-title {
+  font-size:16px;
+  color:#fff;
+  font-weight:700;
+  margin-top:2px;
+}
+.hab-modal-close {
+  width:26px;
+  height:26px;
+  border-radius:6px;
+  border:none;
+  background:rgba(255,255,255,0.08);
+  color:#94a3b8;
+  cursor:pointer;
+  font-size:14px;
+}
+.hab-modal-close:hover {
+  background:rgba(255,255,255,0.16);
+  color:#fff;
+}
+.hab-modal-body {
+  font-size:13px;
+  line-height:1.65;
+  color:#cbd5e1;
+}
+.hab-modal-meta {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:12px;
+}
+.hab-chip {
+  font-size:10px;
+  color:#93c5fd;
+  border:1px solid rgba(147,197,253,0.25);
+  background:rgba(0,95,163,0.15);
+  border-radius:999px;
+  padding:3px 8px;
+}
+.hab-modal-section {
+  margin-top:10px;
+}
+.hab-modal-section-title {
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.11em;
+  color:#60a5fa;
+  margin-bottom:4px;
+  font-weight:700;
+}
+.hab-list-mini {
+  margin:0;
+  padding-left:16px;
+}
+.hab-list-mini li {
+  margin-bottom:4px;
+}
+
+/* ── DATA BAR ── */
+.data-bar {
+  background: var(--navy-mid);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 24px;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  flex-wrap: wrap;
+}
+.data-bar-status { font-size:12px; color: var(--blue-light); }
+.data-bar-actions { display:flex; gap:8px; flex-wrap:wrap; }
+.data-btn {
+  background: rgba(255,255,255,0.08); color:#fff;
+  border:1px solid var(--border); border-radius:6px;
+  padding:6px 12px; font-size:12px; font-weight:600;
+  cursor:pointer; display:inline-flex; align-items:center; gap:6px;
+  transition: background .15s;
+}
+.data-btn:hover { background: rgba(255,255,255,0.16); }
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  display:flex; align-items:center; justify-content:center;
+  min-height: 300px; padding: 40px 24px;
+}
+.empty-state-box {
+  text-align:center; max-width:380px;
+  display:flex; flex-direction:column; align-items:center; gap:12px;
+}
+.empty-state-title { font-size:17px; font-weight:700; }
+.empty-state-text { font-size:12px; color: var(--text-dim); line-height:1.6; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-brand">
+    <span class="pse-badge">PSE</span>
+    <div>
+      <div class="header-title">Evolución ecosistema ACH | PSE</div>
+      <div class="header-sub">18 meses · Q3 2026 → Q1 2028 · 5 olas de implementación · 27 casos de uso</div>
+    </div>
+  </div>
+  <div class="header-legend">
+    <div class="leg"><span class="leg-dot" style="background:#93c5fd"></span>B2C — Persona Natural</div>
+    <div class="leg"><span class="leg-dot" style="background:#86efac"></span>B2B — Persona Jurídica</div>
+    <div class="leg"><span class="leg-dot" style="background:#64748b"></span>Habilitación</div>
+    <div class="leg" style="font-size:10px;color:#475569;">Clic en cada CU para ver la ficha →</div>
+  </div>
+</header>
+
+<div class="data-bar" id="data-bar">
+  <div class="data-bar-status" id="data-status">Cargando datos…</div>
+  <div class="data-bar-actions">
+    <label class="data-btn" for="excel-input">📂 Cargar Excel</label>
+    <input type="file" id="excel-input" accept=".xlsx,.xls" style="display:none">
+    <button class="data-btn" id="template-btn" type="button">⬇️ Descargar plantilla</button>
+  </div>
+</div>
+
+<section class="vision">
+  <div class="vision-content">
+    <div class="vision-intro">
+      PSE deja de ser un canal de pago para convertirse en una plataforma de capacidades financieras: un hub que conecta personas, empresas y el ecosistema financiero colombiano alrededor del movimiento de dinero, independientemente del canal, el instrumento o el caso de uso. La nueva arquitectura desacopla la infraestructura y abre la oportunidad de interoperar y fortalecer el ecosistema ACH Completo, lo que permite crear, escalar o retirar experiencias sin tocar los cimientos — y hace posible que la misma plataforma que hoy por ejemplo procesa un pago de servicios públicos mañana ejecute una instrucción de un agente de inteligencia artificial en el futuro.
+    </div>
+    <ul class="vision-criteria">
+      <li><strong>Desacoplada por diseño</strong><span>La tecnología ya no está amarrada a un caso de uso específico. Un único mecanismo de débito, un único mecanismo de crédito y una reversión estándar reemplazan los múltiples canales y silos actuales. Cualquier servicio nuevo se construye sobre esas capacidades sin reescribirlas.</span></li>
+      <li><strong>Modular y escalable</strong><span>Cada capacidad es una unidad independiente, parametrizable y potencialmente vendible como marca blanca a terceros — bancos, cooperativas, fintechs. El sistema se diseña para N productos y N casos de uso, no para los que existen hoy.</span></li>
+      <li><strong>Un solo punto de conexión</strong><span>Bancos, pasarelas, comercios y personas se integran una sola vez. La plataforma enruta, orquesta y resuelve internamente la complejidad del ecosistema de 49 entidades, sin trasladarla al integrador.</span></li>
+      <li><strong>Orientada al iniciador, no al canal</strong><span>La plataforma identifica quién inicia la transacción — persona, empresa o comercio — y no el canal por el que llega. Ese conocimiento del iniciador es la base del control de fraude, el KYC continuo y la personalización real.</span></li>
+      <li><strong>Experiencia en el centro</strong><span>El Portal PSE pone al usuario en contacto directo con ACH por primera vez: autenticación propia, historial consolidado, múltiples instrumentos de pago, gestión de facturas, agregación de cuentas y analítica financiera — todo desde un único lugar, con la fricción que cada contexto requiere y no más.</span></li>
+      <li><strong>Simplicidad para moverse a la velocidad del usuario</strong><span>La experiencia se diseña para adaptarse al ritmo real de personas y empresas en la gestión de su dinero: decisiones rápidas, flujos claros y respuesta inmediata. La complejidad regulatoria, operativa y técnica se resuelve detrás de escena para que cliente y usuario solo perciban control, agilidad y una experiencia disfrutable de extremo a extremo.</span></li>
+      <li><strong>Datos como activo estratégico</strong><span>Un DataLake unificado reemplaza los silos de reportería por producto. Los datos curados son la materia prima del gestor financiero con IA, del marketing de pagos, del scoring crediticio y de la oferta de valor a comercios — no un subproducto de la operación.</span></li>
+      <li><strong>Alianzas sobre dependencias</strong><span>La plataforma se construye primero con los actores más ágiles del ecosistema — fintechs, billeteras — y se expande hacia los más lentos. Las alianzas se negocian desde una posición de valor, no de permiso.</span></li>
+      <li><strong>Preparada para lo que viene</strong><span>La arquitectura soporta Open Finance, pagos inmediatos (Bre-B), iniciación de pagos (RtP), pagos crossborder, escrow digital y pagos agénticos sin necesidad de refactoring. Cada ola de innovación encuentra la infraestructura lista.</span></li>
+      <li><strong>Construida para evolucionar sin detener</strong><span>El edificio nuevo se levanta mientras el actual sigue operando. La migración es gradual, validada y reversible. La velocidad de producto deja de depender del monolito.</span></li>
+    </ul>    
+  </div>
+</section>
+
+<div class="empty-state" id="empty-state">
+  <div class="empty-state-box">
+    <div class="empty-state-title">Sin datos cargados</div>
+    <div class="empty-state-text">Carga el archivo Excel del roadmap (o coloca "roadmap_data_pse.xlsx" junto a este HTML) para ver las olas y casos de uso.</div>
+    <label class="data-btn" for="excel-input">📂 Cargar Excel</label>
+  </div>
+</div>
+
+<div class="board">
+  <div class="scroll-hint">← Desplaza horizontalmente para ver todas las olas →</div>
+  <div class="olas-row" id="olas-row"></div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closePanel()"></div>
+<div class="panel" id="panel">
+  <div class="panel-top">
+    <button class="panel-close" onclick="closePanel()">✕</button>
+    <div class="panel-num" id="p-num"></div>
+    <div class="panel-title" id="p-title"></div>
+    <div class="panel-badges" id="p-badges"></div>
+  </div>
+  <div class="panel-body" id="p-body"></div>
+</div>
+
+<div class="hab-modal-overlay" id="hab-overlay" onclick="closeHabModal()"></div>
+<div class="hab-modal" id="hab-modal">
+  <div class="hab-modal-top">
+    <div>
+      <div class="hab-modal-id" id="hab-id"></div>
+      <div class="hab-modal-title" id="hab-title"></div>
+    </div>
+    <button class="hab-modal-close" onclick="closeHabModal()">✕</button>
+  </div>
+  <div class="hab-modal-meta" id="hab-meta"></div>
+  <div class="hab-modal-body">
+    <div class="hab-modal-section">
+      <div class="hab-modal-section-title">Resumen</div>
+      <div id="hab-body"></div>
+    </div>
+    <div class="hab-modal-section">
+      <div class="hab-modal-section-title">Que Habilita</div>
+      <ul class="hab-list-mini" id="hab-enables"></ul>
+    </div>
+    <div class="hab-modal-section">
+      <div class="hab-modal-section-title">Prerequisitos</div>
+      <ul class="hab-list-mini" id="hab-prereq"></ul>
+    </div>
+    <div class="hab-modal-section">
+      <div class="hab-modal-section-title">Relacion de Dependencias</div>
+      <ul class="hab-list-mini" id="hab-blocks"></ul>
+    </div>
+    <div class="hab-modal-section">
+      <div class="hab-modal-section-title">Consideraciones Clave</div>
+      <ul class="hab-list-mini" id="hab-considerations"></ul>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+/* ===== DATA (cargado desde Excel) ===== */
+let fichas = {};
+let olas = [];
+let habIdsByOla = {};
+let habCatalog = {};
+let habCapaMap = {};
+let habPriority = {};
+let habPrereqMap = {};
+let habBlocksMap = {};
+let habEnablesMap = {};
+let habConsiderationsMap = {};
+
+function cellToList(v) {
+  if (v === undefined || v === null) return [];
+  return String(v).split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+}
+
+function sheetRows(wb, name) {
+  const ws = wb.Sheets[name];
+  return ws ? XLSX.utils.sheet_to_json(ws, { defval: '' }) : [];
+}
+
+function parseWorkbook(wb) {
+  const olasRows = sheetRows(wb, 'Olas');
+  const fichasRows = sheetRows(wb, 'Fichas');
+  const olasCuRows = sheetRows(wb, 'Olas_CU');
+  const olasHabRows = sheetRows(wb, 'Olas_Habilitadores');
+  const habCatRows = sheetRows(wb, 'Habilitadores_Catalogo');
+  const habRelRows = sheetRows(wb, 'Habilitadores_Relaciones');
+
+  if (!olasRows.length || !fichasRows.length) {
+    throw new Error("El archivo no tiene las hojas 'Olas' y/o 'Fichas' con datos.");
+  }
+
+  const newFichas = {};
+  fichasRows.forEach(r => {
+    const id = String(r.ficha_id).trim();
+    if (!id) return;
+    newFichas[id] = {
+      nombre: r.nombre || '',
+      segmento: r.segmento || '',
+      descripcion: r.descripcion || '',
+      objetivo: r.objetivo || '',
+      avance: Number(r.avance) || 0,
+      trabajos: cellToList(r.trabajos),
+      casos: cellToList(r.casos),
+      mercado: cellToList(r.mercado),
+      amenaza: Number(r.amenaza) || 0,
+      ingreso: r.ingreso || '',
+      validacion: r.validacion || '',
+      competencia: cellToList(r.competencia)
+    };
+  });
+
+  const cuByOla = {};
+  olasCuRows.forEach(r => {
+    const olaId = Number(r.ola_id);
+    if (!cuByOla[olaId]) cuByOla[olaId] = [];
+    cuByOla[olaId].push({ f: String(r.ficha_id).trim(), a: r.alcance || '' });
+  });
+
+  const habByOla = {};
+  olasHabRows
+    .slice()
+    .sort((a, b) => Number(a.orden) - Number(b.orden))
+    .forEach(r => {
+      const olaId = Number(r.ola_id);
+      if (!habByOla[olaId]) habByOla[olaId] = [];
+      habByOla[olaId].push({ hab_id: String(r.hab_id).trim(), texto: r.texto || '' });
+    });
+
+  const newOlas = olasRows.map(r => {
+    const id = Number(r.ola_id);
+    return {
+      id,
+      nombre: r.nombre || '',
+      sub: r.sub || '',
+      desc: r.desc || '',
+      periodo: r.periodo || '',
+      dur: r.dur || '',
+      color: r.color || '#37474F',
+      stretch: String(r.stretch || '').trim().toUpperCase() === 'SI',
+      hab: (habByOla[id] || []).map(h => h.texto),
+      cus: cuByOla[id] || []
+    };
+  }).sort((a, b) => a.id - b.id);
+
+  const newHabIdsByOla = {};
+  Object.keys(habByOla).forEach(olaId => {
+    newHabIdsByOla[olaId] = habByOla[olaId].map(h => h.hab_id);
+  });
+
+  const newHabCatalog = {};
+  const newHabCapaMap = {};
+  const newHabPriority = {};
+  habCatRows.forEach(r => {
+    const hid = String(r.hab_id).trim();
+    if (!hid) return;
+    newHabCatalog[hid] = { titulo: r.titulo || '', desc: r.descripcion || '' };
+    newHabPriority[hid] = r.prioridad || 'Media';
+    cellToList(String(r.capa || '').split('|').join('\n')).forEach(capa => {
+      if (!newHabCapaMap[capa]) newHabCapaMap[capa] = [];
+      newHabCapaMap[capa].push(hid);
+    });
+  });
+
+  const newHabPrereqMap = {};
+  const newHabBlocksMap = {};
+  const newHabEnablesMap = {};
+  const newHabConsiderationsMap = {};
+  habRelRows.forEach(r => {
+    const hid = String(r.hab_id).trim();
+    if (!hid) return;
+    newHabPrereqMap[hid] = cellToList(r.prerequisitos);
+    newHabBlocksMap[hid] = cellToList(r.bloquea);
+    newHabEnablesMap[hid] = cellToList(r.habilita);
+    newHabConsiderationsMap[hid] = cellToList(r.consideraciones);
+  });
+
+  fichas = newFichas;
+  olas = newOlas;
+  habIdsByOla = newHabIdsByOla;
+  habCatalog = newHabCatalog;
+  habCapaMap = newHabCapaMap;
+  habPriority = newHabPriority;
+  habPrereqMap = newHabPrereqMap;
+  habBlocksMap = newHabBlocksMap;
+  habEnablesMap = newHabEnablesMap;
+  habConsiderationsMap = newHabConsiderationsMap;
+}
+
+function getHabMeta(habId) {
+  let olaObj = null;
+  for (const o of olas) {
+    if ((habIdsByOla[o.id] || []).includes(habId)) { olaObj = o; break; }
+  }
+  const capas = Object.keys(habCapaMap).filter(c => (habCapaMap[c] || []).includes(habId));
+  return {
+    ola: olaObj ? `Ola ${olaObj.id}` : 'N/D',
+    periodo: olaObj ? olaObj.periodo : 'N/D',
+    capa: capas.length ? capas.join(' | ') : 'N/D',
+    prioridad: habPriority[habId] || 'Media'
+  };
+}
+
+function setList(id, arr) {
+  const ul = document.getElementById(id);
+  const items = (arr && arr.length) ? arr : ['Sin informacion adicional registrada.'];
+  ul.innerHTML = items.map(x => `<li>${x}</li>`).join('');
+}
+
+function getHabId(olaId, habIndex) {
+  const ids = habIdsByOla[olaId] || [];
+  return ids[habIndex] || "HAB-ND";
+}
+
+function openHabModal(habId) {
+  const h = habCatalog[habId] || { titulo: "Habilitador", desc: "Sin descripcion disponible." };
+  const meta = getHabMeta(habId);
+  document.getElementById('hab-id').textContent = habId;
+  document.getElementById('hab-title').textContent = h.titulo;
+  document.getElementById('hab-body').textContent = h.desc;
+  document.getElementById('hab-meta').innerHTML = `
+    <span class="hab-chip">${meta.ola}</span>
+    <span class="hab-chip">${meta.periodo}</span>
+    <span class="hab-chip">${meta.capa}</span>
+    <span class="hab-chip">Prioridad: ${meta.prioridad}</span>`;
+  setList('hab-enables', habEnablesMap[habId]);
+  setList('hab-prereq', habPrereqMap[habId]);
+  setList('hab-blocks', habBlocksMap[habId]);
+  setList('hab-considerations', habConsiderationsMap[habId]);
+  document.getElementById('hab-overlay').classList.add('on');
+  document.getElementById('hab-modal').classList.add('on');
+}
+
+function closeHabModal() {
+  document.getElementById('hab-overlay').classList.remove('on');
+  document.getElementById('hab-modal').classList.remove('on');
+}
+
+/* ===== RENDER OLAS ===== */
+function renderBoard() {
+  const row = document.getElementById('olas-row');
+  row.innerHTML = '';
+olas.forEach(ola => {
+  const col = document.createElement('div');
+  col.className = 'ola-col';
+  const headStyle = `background: linear-gradient(135deg, ${ola.color}cc, ${ola.color}88);`;
+  const cuCards = ola.cus.filter(cu => fichas[cu.f].segmento === 'B2C').map(cu => {
+    const f = fichas[cu.f];
+    const seg = f.segmento;
+    const fichaIdJs = typeof cu.f === 'string' ? `'${cu.f.replace(/'/g,"\\'")}'` : cu.f;
+    return `<div class="cu-card" data-ficha="${cu.f}" data-alcance="${cu.a.replace(/"/g,'&quot;')}" onclick="openPanel(${fichaIdJs},this,\`${cu.a.replace(/`/g,'\\`')}\`)">
+      <div class="cu-row">
+        <div class="cu-name">${f.nombre}</div>
+        <div class="cu-tags">
+          <span class="tag ${seg==='B2C'?'tag-b2c':'tag-b2b'}">${seg}</span>
+          <span class="tag tag-num">${cu.f.toString().padStart(2,'0')}</span>
+        </div>
+      </div>
+      <div class="cu-alcance">${cu.a}</div>
+    </div>`;
+  }).join('');
+
+  col.innerHTML = `
+    <div class="ola-head" style="${headStyle}">
+      <div class="ola-eyebrow">Ola ${ola.id}</div>
+      <div class="ola-name">${ola.nombre}</div>
+      <div class="ola-sub">${ola.sub}</div>
+      <div class="ola-desc">${ola.desc}</div>
+      <div>
+        <span class="ola-periodo">📅 ${ola.periodo} · ${ola.dur}</span>
+        ${ola.stretch?'<span class="ola-stretch">STRETCH</span>':''}
+      </div>
+    </div>
+    <div class="ola-body">
+      <div class="section-label">Habilitación</div>
+      <ul class="hab-list">${ola.hab.map((h, idx) => {
+        const habId = getHabId(ola.id, idx);
+        return `<li class="hab-item"><span class="hab-item-text">${h}</span><button class="hab-info-btn" type="button" onclick="openHabModal('${habId}')" title="Ver detalle ${habId}" aria-label="Ver detalle ${habId}">i</button></li>`;
+      }).join('')}</ul>
+      <div class="section-label">Casos de Uso</div>
+      <div class="cu-stack">${cuCards}</div>
+    </div>`;
+  row.appendChild(col);
+});
+}
+
+/* ===== PANEL ===== */
+let activeCard = null;
+function amClass(v){return v>=8?'am-high':v>=5?'am-mid':'am-low';}
+function amColor(v){return v>=8?'#ef4444':v>=5?'#eab308':'#22c55e';}
+
+function openPanel(id, card, alcance) {
+  if(activeCard){ activeCard.classList.remove('is-active'); }
+  card.classList.add('is-active');
+  activeCard = card;
+
+  const f = fichas[id];
+  const seg = f.segmento;
+
+  document.getElementById('p-num').textContent = `Ficha ${String(id).padStart(2,'0')} · ${seg}`;
+  document.getElementById('p-title').textContent = f.nombre;
+  document.getElementById('p-badges').innerHTML = `
+    <span class="badge badge-obj">${f.objetivo}</span>
+    <span class="badge badge-av">Avance ${f.avance}%</span>
+    <span class="badge badge-val">Validado: ${f.validacion}</span>
+    <span class="badge badge-ing">Ingreso: ${f.ingreso}</span>
+    <span class="badge badge-am ${amClass(f.amenaza)}">Amenaza ${f.amenaza}/10</span>
+    <span class="tag ${seg==='B2C'?'tag-b2c':'tag-b2b'}" style="font-size:11px;padding:4px 9px;">${seg}</span>`;
+
+  document.getElementById('p-body').innerHTML = `
+    <div class="p-section">
+      <div class="p-alcance-box">
+        <div class="p-alcance-lbl">Alcance en esta ola</div>
+        <div class="p-alcance-txt">${alcance}</div>
+      </div>
+    </div>
+    <div class="p-section">
+      <div class="p-stitle">Descripción</div>
+      <div class="p-desc">${f.descripcion}</div>
+    </div>
+    <div class="p-section">
+      <div class="p-stitle">Trabajos que resuelve</div>
+      <ul class="p-list">${f.trabajos.map(t=>`<li>${t}</li>`).join('')}</ul>
+    </div>
+    <div class="p-section">
+      <div class="p-stitle">Casos de Uso</div>
+      <ul class="p-list">${f.casos.map(c=>`<li>${c}</li>`).join('')}</ul>
+    </div>
+    <div class="p-section">
+      <div class="p-stitle">Potencial de Mercado</div>
+      ${f.mercado.map(m=>`<div class="p-mkt-item">${m}</div>`).join('')}
+    </div>
+    <div class="p-section">
+      <div class="p-stitle">Indicadores</div>
+      <div class="p-grid">
+        <div class="p-stat">
+          <div class="p-stat-lbl">Amenaza competitiva</div>
+          <div class="p-stat-val">${f.amenaza}/10</div>
+          <div class="p-threat"><div class="p-threat-fill" style="width:${f.amenaza*10}%;background:${amColor(f.amenaza)}"></div></div>
+        </div>
+        <div class="p-stat">
+          <div class="p-stat-lbl">Ingreso potencial</div>
+          <div class="p-stat-val ${f.ingreso.startsWith('Alto')?'g':'y'}">${f.ingreso}</div>
+        </div>
+        <div class="p-stat">
+          <div class="p-stat-lbl">% Avance actual</div>
+          <div class="p-stat-val">${f.avance}%</div>
+          <div class="p-threat"><div class="p-threat-fill" style="width:${f.avance}%;background:#3b82f6"></div></div>
+        </div>
+        <div class="p-stat">
+          <div class="p-stat-lbl">Validado con mercado</div>
+          <div class="p-stat-val ${f.validacion==='Sí'?'g':'y'}">${f.validacion}</div>
+        </div>
+      </div>
+    </div>
+    <div class="p-section">
+      <div class="p-stitle">Competencia relevante</div>
+      <div class="p-comp-chips">${f.competencia.map(c=>`<span class="p-comp-chip">${c}</span>`).join('')}</div>
+    </div>`;
+
+  document.getElementById('overlay').classList.add('on');
+  document.getElementById('panel').classList.add('on');
+}
+
+function closePanel() {
+  document.getElementById('overlay').classList.remove('on');
+  document.getElementById('panel').classList.remove('on');
+  if(activeCard){ activeCard.classList.remove('is-active'); activeCard=null; }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closePanel();
+    closeHabModal();
+  }
+});
+
+/* ===== CARGA DE DATOS DESDE EXCEL ===== */
+const dataStatusEl = document.getElementById('data-status');
+const emptyStateEl = document.getElementById('empty-state');
+const boardEl = document.querySelector('.board');
+
+function setDataStatus(msg, isError) {
+  dataStatusEl.textContent = msg;
+  dataStatusEl.style.color = isError ? '#fca5a5' : '';
+}
+
+function showEmptyState(show) {
+  if (emptyStateEl) emptyStateEl.style.display = show ? 'flex' : 'none';
+  if (boardEl) boardEl.style.display = show ? 'none' : 'block';
+}
+
+function applyWorkbook(wb, label) {
+  try {
+    parseWorkbook(wb);
+    renderBoard();
+    showEmptyState(false);
+    const now = new Date().toLocaleString('es-CO');
+    setDataStatus(`✅ ${label} · ${Object.keys(fichas).length} fichas · ${olas.length} olas · cargado ${now}`);
+  } catch (err) {
+    console.error(err);
+    setDataStatus(`⚠️ Error leyendo "${label}": ${err.message}`, true);
+  }
+}
+
+function loadArrayBuffer(buf, label) {
+  const wb = XLSX.read(buf, { type: 'array' });
+  applyWorkbook(wb, label);
+}
+
+document.getElementById('excel-input').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => loadArrayBuffer(ev.target.result, file.name);
+  reader.onerror = () => setDataStatus(`⚠️ No se pudo leer el archivo ${file.name}`, true);
+  reader.readAsArrayBuffer(file);
+});
+
+document.getElementById('template-btn').addEventListener('click', exportTemplate);
+
+function exportTemplate() {
+  const wb = XLSX.utils.book_new();
+  const NL = '\n';
+
+  const olasSheet = olas.length ? olas.map(o => ({
+    ola_id: o.id, nombre: o.nombre, sub: o.sub, desc: o.desc,
+    periodo: o.periodo, dur: o.dur, color: o.color, stretch: o.stretch ? 'SI' : 'NO'
+  })) : [{ ola_id: '', nombre: '', sub: '', desc: '', periodo: '', dur: '', color: '', stretch: '' }];
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(olasSheet), 'Olas');
+
+  const fichasSheet = Object.keys(fichas).length ? Object.keys(fichas).map(fid => {
+    const f = fichas[fid];
+    return {
+      ficha_id: fid, nombre: f.nombre, segmento: f.segmento, descripcion: f.descripcion,
+      objetivo: f.objetivo, avance: f.avance, trabajos: f.trabajos.join(NL),
+      casos: f.casos.join(NL), mercado: f.mercado.join(NL), amenaza: f.amenaza,
+      ingreso: f.ingreso, validacion: f.validacion, competencia: f.competencia.join(NL)
+    };
+  }) : [{ ficha_id: '', nombre: '', segmento: '', descripcion: '', objetivo: '', avance: '', trabajos: '', casos: '', mercado: '', amenaza: '', ingreso: '', validacion: '', competencia: '' }];
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(fichasSheet), 'Fichas');
+
+  const olasCuSheet = [];
+  olas.forEach(o => (o.cus || []).forEach(cu => olasCuSheet.push({ ola_id: o.id, ficha_id: cu.f, alcance: cu.a })));
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(olasCuSheet.length ? olasCuSheet : [{ ola_id: '', ficha_id: '', alcance: '' }]), 'Olas_CU');
+
+  const olasHabSheet = [];
+  olas.forEach(o => {
+    const ids = habIdsByOla[o.id] || [];
+    (o.hab || []).forEach((txt, idx) => olasHabSheet.push({ ola_id: o.id, orden: idx + 1, hab_id: ids[idx] || '', texto: txt }));
+  });
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(olasHabSheet.length ? olasHabSheet : [{ ola_id: '', orden: '', hab_id: '', texto: '' }]), 'Olas_Habilitadores');
+
+  const habCatSheet = Object.keys(habCatalog).length ? Object.keys(habCatalog).map(hid => {
+    const capas = Object.keys(habCapaMap).filter(c => (habCapaMap[c] || []).includes(hid));
+    return { hab_id: hid, titulo: habCatalog[hid].titulo, descripcion: habCatalog[hid].desc, capa: capas.join(' | '), prioridad: habPriority[hid] || 'Media' };
+  }) : [{ hab_id: '', titulo: '', descripcion: '', capa: '', prioridad: '' }];
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(habCatSheet), 'Habilitadores_Catalogo');
+
+  const habRelSheet = Object.keys(habCatalog).length ? Object.keys(habCatalog).map(hid => ({
+    hab_id: hid,
+    prerequisitos: (habPrereqMap[hid] || []).join(NL),
+    bloquea: (habBlocksMap[hid] || []).join(NL),
+    habilita: (habEnablesMap[hid] || []).join(NL),
+    consideraciones: (habConsiderationsMap[hid] || []).join(NL)
+  })) : [{ hab_id: '', prerequisitos: '', bloquea: '', habilita: '', consideraciones: '' }];
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(habRelSheet), 'Habilitadores_Relaciones');
+
+  XLSX.writeFile(wb, 'roadmap_data_pse.xlsx');
+}
+
+/* Intenta autocargar si el HTML y el Excel se sirven desde un servidor web (http/https) */
+showEmptyState(true);
+setDataStatus('Sin datos cargados — usa "Cargar Excel" o coloca roadmap_data_pse.xlsx junto a este archivo.');
+fetch('roadmap_data_pse.xlsx')
+  .then(r => (r.ok ? r.arrayBuffer() : Promise.reject(new Error('no encontrado'))))
+  .then(buf => loadArrayBuffer(buf, 'roadmap_data_pse.xlsx (auto)'))
+  .catch(() => { /* silencioso: probablemente file:// o el archivo no existe junto al HTML */ });
+</script>
+</body>
+</html>
