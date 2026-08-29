@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>ACH Waves — Roadmap desde Excel</title>
+<style>
+:root {
+  --navy: #0D1B2A;
+  --navy-mid: #112336;
+  --navy-light: #172f45;
+  --blue: #005FA3;
+  --blue-dark: #004A80;
+  --blue-light: #A8C4D8;
+  --blue-pale: #EEF4FB;
+  --white: #ffffff;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+  --text-mid: #cbd5e1;
+  --border: rgba(168,196,216,0.15);
+  --ola0: #37474F;
+  --ola1: #1A56A0;
+  --ola2: #00695C;
+  --ola3: #5B21B6;
+  --ola4: #B45309;
+  --b2c: #1d6fa4;
+  --b2b: #166534;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Calibri', 'Segoe UI', system-ui, sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+.header {
+  position: sticky; top:0; z-index:200;
+  background: var(--navy);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+}
+.header-brand { display:flex; align-items:center; gap:12px; }
+.pse-badge {
+  background: var(--blue); color:white;
+  font-size:11px; font-weight:800; letter-spacing:.12em;
+  padding:5px 10px; border-radius:5px;
+  text-transform:uppercase;
+}
+.header-title { font-size:16px; font-weight:700; }
+.header-sub { font-size:11px; color:var(--blue-light); margin-top:1px; }
+.header-legend { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.leg { display:flex; gap:6px; align-items:center; font-size:11px; color:var(--text-dim); }
+.leg-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+
+.header-actions { display:flex; gap:8px; align-items:center; }
+.btn {
+  font-family:inherit;
+  font-size:11px; font-weight:700;
+  border-radius:6px; padding:7px 12px;
+  border:1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  color: var(--white);
+  cursor:pointer;
+  display:inline-flex; align-items:center; gap:6px;
+  white-space:nowrap;
+}
+.btn:hover { background: rgba(255,255,255,0.11); }
+.btn-primary { background: var(--blue); border-color: var(--blue); }
+.btn-primary:hover { background: #0072bd; }
+input[type=file] { display:none; }
+
+/* ── EMPTY STATE / DROPZONE ── */
+.empty-wrap { max-width: 720px; margin: 60px auto; padding: 0 24px; text-align:center; }
+.dropzone {
+  border: 2px dashed rgba(168,196,216,0.3);
+  border-radius: 14px;
+  padding: 46px 24px;
+  background: rgba(255,255,255,0.03);
+  transition: border-color .15s, background .15s;
+}
+.dropzone.dragover { border-color: var(--blue); background: rgba(0,95,163,0.12); }
+.dropzone-icon { font-size:36px; margin-bottom:12px; }
+.dropzone h2 { font-size:17px; margin-bottom:6px; font-weight:700; }
+.dropzone p { font-size:12.5px; color: var(--text-dim); line-height:1.6; margin-bottom:18px; }
+.dropzone .hint { font-size:11px; color: var(--text-muted); margin-top:14px; }
+.status-msg { margin-top:14px; font-size:12px; padding:10px 14px; border-radius:8px; display:none; }
+.status-msg.error { display:block; background: rgba(220,38,38,0.15); color:#fca5a5; border:1px solid rgba(220,38,38,0.35); }
+.status-msg.ok { display:block; background: rgba(22,163,74,0.15); color:#86efac; border:1px solid rgba(22,163,74,0.35); }
+
+/* ── VISION SECTION ── */
+.vision {
+  background: linear-gradient(135deg, rgba(13,27,42,0.8), rgba(23,47,69,0.8));
+  border-bottom: 1px solid rgba(168,196,216,0.15);
+  padding: 40px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.vision-content { font-size: 13px; line-height: 1.65; color: #cbd5e1; }
+.vision-intro { font-size: 14px; font-weight: 600; color: #ffffff; margin-bottom: 16px; line-height: 1.7; white-space:pre-wrap; }
+.vision-meta { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:6px; }
+.vision-meta-chip {
+  background: rgba(255,255,255,0.05); border:1px solid rgba(168,196,216,0.18);
+  border-radius:20px; padding:4px 11px; font-size:11px; color:#93c5fd; font-weight:600;
+}
+.vision-meta-chip b { color:var(--white); font-weight:800; }
+.vision-criteria {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  list-style: none;
+  padding: 0;
+}
+.vision-criteria li {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(168,196,216,0.15);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.vision-criteria li strong { color: #ffffff; font-weight: 700; font-size: 13px; line-height: 1.3; }
+.vision-criteria li span { font-size: 11px; line-height: 1.5; color: #94a3b8; font-weight: 400; white-space:pre-wrap; }
+.vision-footer {
+  margin-top: 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(168,196,216,0.15);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 12px;
+  font-style: italic;
+  color: #60a5fa;
+  text-align: center;
+  font-weight: 500;
+  white-space:pre-wrap;
+}
+
+/* ── SCROLL WRAPPER ── */
+.board { overflow-x: auto; padding: 20px 24px 40px; scrollbar-width: thin; scrollbar-color: #334155 var(--navy); }
+.board::-webkit-scrollbar { height:6px; }
+.board::-webkit-scrollbar-track { background: var(--navy); }
+.board::-webkit-scrollbar-thumb { background: #334155; border-radius:3px; }
+.scroll-hint { text-align:center; padding:8px 0; font-size:11px; color:#334155; letter-spacing:.06em; }
+
+/* ── OLA COLUMNS ── */
+.olas-row { display:flex; gap:14px; align-items:flex-start; min-width:max-content; }
+.ola-col {
+  width: 272px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  flex-shrink:0;
+  display:flex; flex-direction:column;
+}
+.ola-head { padding: 14px 16px 12px; position: relative; }
+.ola-eyebrow { font-size:9px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; opacity:.75; margin-bottom:3px; }
+.ola-name { font-size:15px; font-weight:800; line-height:1.25; }
+.ola-sub { font-size:11px; opacity:.65; margin-top:2px; }
+.ola-desc { margin-top:8px; font-size:10px; line-height:1.45; color:rgba(255,255,255,0.86); }
+.ola-periodo {
+  display:inline-flex; align-items:center; gap:4px; margin-top:8px;
+  font-size:10px; font-weight:600; background: rgba(255,255,255,0.12);
+  padding:3px 9px; border-radius:20px;
+}
+.ola-stretch {
+  display:inline-block; margin-left:6px; font-size:9px; font-weight:700; letter-spacing:.06em;
+  background: rgba(255,255,255,0.15); padding:2px 7px; border-radius:3px; vertical-align:middle;
+}
+.ola-body { padding:12px; flex:1; }
+
+/* ── HABILITACIÓN ── */
+.section-label {
+  display:flex; align-items:center; gap:6px;
+  font-size:9px; font-weight:800; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--blue-light);
+  margin-bottom:7px;
+}
+.section-label::after { content:''; flex:1; height:1px; background: var(--border); }
+.hab-list { list-style:none; margin-bottom:14px; }
+.hab-item { font-size:11px; color:#6b7f94; padding:4px 22px 4px 13px; position:relative; line-height:1.45; border-bottom:1px solid rgba(255,255,255,0.035); }
+.hab-item:last-child { border-bottom:none; }
+.hab-item::before { content:'›'; position:absolute; left:0; color:var(--blue); opacity:.6; }
+.hab-item-text { display:block; }
+.hab-info-btn {
+  width:14px; height:14px; border-radius:50%;
+  border:1px solid rgba(96,165,250,0.4);
+  background:rgba(0,95,163,0.15); color:#93c5fd;
+  font-size:9px; font-weight:800; line-height:1;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; position:absolute; top:4px; right:0; padding:0;
+}
+.hab-info-btn:hover { background:rgba(0,95,163,0.32); border-color:rgba(147,197,253,0.7); }
+.hab-empty { font-size:10.5px; color:#475569; padding:4px 0 10px; }
+
+/* ── CU CARDS ── */
+.cu-stack { display:flex; flex-direction:column; gap:5px; }
+.cu-card {
+  background: rgba(255,255,255,0.05);
+  border:1px solid rgba(168,196,216,0.1);
+  border-radius:8px; padding:9px 11px;
+  cursor:pointer;
+  transition: background .15s, border-color .15s, transform .15s;
+  display:flex; flex-direction:column; gap:4px;
+}
+.cu-card:hover { background: rgba(255,255,255,0.1); border-color: rgba(168,196,216,0.28); transform: translateY(-1px); }
+.cu-card.is-active { border-color: var(--blue); background: rgba(0,95,163,0.14); }
+.cu-row { display:flex; align-items:flex-start; justify-content:space-between; gap:6px; }
+.cu-name { font-size:9px; font-weight:800; color:#60a5fa; line-height:1.2; letter-spacing:.05em; text-transform:uppercase; opacity:.9; flex:1; }
+.cu-tags { display:flex; gap:3px; flex-shrink:0; align-items:center; }
+.tag { font-size:9px; font-weight:800; padding:2px 6px; border-radius:3px; letter-spacing:.04em; white-space:nowrap; }
+.tag-b2c { background:rgba(29,111,164,0.28); color:#93c5fd; border:1px solid rgba(29,111,164,0.4); }
+.tag-b2b { background:rgba(22,101,52,0.28); color:#86efac; border:1px solid rgba(22,101,52,0.4); }
+.tag-num { background:rgba(255,255,255,0.07); color:#64748b; border:1px solid rgba(255,255,255,0.08); }
+.cu-alcance { font-size:12px; font-weight:500; color:var(--white); line-height:1.5; }
+
+/* ── OVERLAY + PANEL ── */
+.overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:400; backdrop-filter: blur(2px); }
+.overlay.on { display:block; }
+.panel {
+  position:fixed; top:0; right:-540px; width:520px;
+  height:100vh; overflow-y:auto;
+  background: #0c1e2f;
+  border-left:1px solid rgba(168,196,216,0.18);
+  z-index:500;
+  transition: right .28s cubic-bezier(.4,0,.2,1);
+  display:flex; flex-direction:column;
+}
+.panel.on { right:0; }
+.panel-top { padding:20px 22px 16px; border-bottom:1px solid var(--border); position:sticky; top:0; background: #0c1e2f; z-index:10; }
+.panel-close {
+  position:absolute; top:16px; right:16px;
+  background:rgba(255,255,255,0.07); border:none;
+  color:var(--text-dim); width:28px; height:28px;
+  border-radius:6px; cursor:pointer; font-size:15px;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .15s;
+}
+.panel-close:hover { background:rgba(255,255,255,0.14); color:white; }
+.panel-num { font-size:10px; font-weight:800; letter-spacing:.18em; color:var(--blue-light); margin-bottom:5px; text-transform:uppercase; }
+.panel-title { font-size:19px; font-weight:800; line-height:1.25; padding-right:36px; margin-bottom:10px; }
+.panel-badges { display:flex; flex-wrap:wrap; gap:5px; align-items:center; }
+.badge { font-size:10px; font-weight:700; padding:3px 8px; border-radius:4px; white-space:nowrap; }
+.badge-obj { background:rgba(0,95,163,.2); color:#93c5fd; border:1px solid rgba(0,95,163,.3); }
+.badge-av { background:rgba(255,255,255,.06); color:#64748b; border:1px solid rgba(255,255,255,.09); }
+.badge-val { background:rgba(34,197,94,.1); color:#86efac; border:1px solid rgba(34,197,94,.18); }
+.badge-ing { background:rgba(234,179,8,.1); color:#fde047; border:1px solid rgba(234,179,8,.15); }
+.badge-am { font-weight:800; }
+.am-low { background:rgba(34,197,94,.1); color:#86efac; border:1px solid rgba(34,197,94,.18); }
+.am-mid { background:rgba(234,179,8,.1); color:#fde047; border:1px solid rgba(234,179,8,.15); }
+.am-high { background:rgba(239,68,68,.13); color:#fca5a5; border:1px solid rgba(239,68,68,.2); }
+
+.panel-body { padding:18px 22px 24px; flex:1; }
+.p-section { margin-bottom:18px; }
+.p-stitle { font-size:9px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--blue-light); padding-bottom:6px; margin-bottom:7px; border-bottom:1px solid var(--border); }
+.p-desc { font-size:13px; color:var(--text-mid); line-height:1.7; white-space:pre-wrap; }
+.p-list { list-style:none; }
+.p-list li { font-size:12px; color:var(--text-dim); padding:5px 0 5px 16px; position:relative; line-height:1.5; border-bottom:1px solid rgba(255,255,255,0.04); }
+.p-list li:last-child { border-bottom:none; }
+.p-list li::before { content:'→'; position:absolute; left:0; color:var(--blue); font-size:11px; }
+.p-alcance-box { background: rgba(0,95,163,.08); border:1px solid rgba(0,95,163,.2); border-radius:8px; padding:10px 13px; }
+.p-alcance-lbl { font-size:9px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:#60a5fa; margin-bottom:4px; }
+.p-alcance-txt { font-size:12px; color:#93c5fd; line-height:1.5; white-space:pre-wrap; }
+.p-grid { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
+.p-stat { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); border-radius:7px; padding:9px 11px; }
+.p-stat-lbl { font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#475569; margin-bottom:3px; }
+.p-stat-val { font-size:13px; font-weight:700; color:white; }
+.p-stat-val.g { color:#4ade80; }
+.p-stat-val.y { color:#fbbf24; }
+.p-threat { height:4px; background:rgba(255,255,255,.08); border-radius:2px; overflow:hidden; margin-top:5px; }
+.p-threat-fill { height:100%; border-radius:2px; background:#3b82f6; }
+.p-mkt-item { font-size:12px; color:var(--text-mid); line-height:1.55; padding:5px 0; border-bottom:1px solid rgba(255,255,255,.05); }
+.p-mkt-item:last-child { border-bottom:none; }
+.p-comp-chips { display:flex; flex-wrap:wrap; gap:5px; }
+.p-comp-chip { font-size:11px; color:#64748b; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:3px 9px; border-radius:20px; }
+
+/* ── HABILITADOR MODAL ── */
+.hab-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:700; }
+.hab-modal-overlay.on { display:block; }
+.hab-modal {
+  position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+  width:min(680px, 92vw); max-height:80vh; overflow:auto;
+  background:#0c1e2f; border:1px solid rgba(168,196,216,0.2);
+  border-radius:12px; box-shadow:0 24px 60px rgba(0,0,0,0.45);
+  padding:18px 18px 16px; z-index:710; display:none;
+}
+.hab-modal.on { display:block; }
+.hab-modal-top { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:10px; }
+.hab-modal-id { font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#60a5fa; font-weight:800; }
+.hab-modal-title { font-size:16px; color:#fff; font-weight:700; margin-top:2px; }
+.hab-modal-close { width:26px; height:26px; border-radius:6px; border:none; background:rgba(255,255,255,0.08); color:#94a3b8; cursor:pointer; font-size:14px; }
+.hab-modal-close:hover { background:rgba(255,255,255,0.16); color:#fff; }
+.hab-modal-body { font-size:13px; line-height:1.65; color:#cbd5e1; white-space:pre-wrap; }
+.hab-modal-meta { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+.hab-chip { font-size:10px; color:#93c5fd; border:1px solid rgba(147,197,253,0.25); background:rgba(0,95,163,0.15); border-radius:999px; padding:3px 8px; }
+.hab-modal-section { margin-top:10px; }
+.hab-modal-section-title { font-size:10px; text-transform:uppercase; letter-spacing:.11em; color:#60a5fa; margin-bottom:4px; font-weight:700; }
+.hab-list-mini { margin:0; padding-left:16px; }
+.hab-list-mini li { margin-bottom:4px; font-size:12.5px; color:#cbd5e1; }
+
+/* ── EDIT MODE ── */
+.btn-edit-on { background: rgba(234,179,8,.18); border-color: rgba(234,179,8,.4); color:#fde047; }
+.icon-btn {
+  width:20px; height:20px; border-radius:5px; border:1px solid rgba(255,255,255,0.14);
+  background:rgba(255,255,255,0.06); color:#cbd5e1; font-size:10px; line-height:1;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; padding:0; flex-shrink:0;
+}
+.icon-btn:hover { background:rgba(255,255,255,0.16); color:#fff; }
+.icon-btn.danger:hover { background:rgba(220,38,38,0.35); border-color:rgba(220,38,38,0.5); color:#fca5a5; }
+.cu-card { position:relative; }
+.cu-edit-actions { display:flex; gap:4px; flex-shrink:0; }
+.hab-item { padding-right:48px; }
+.hab-edit-actions { position:absolute; top:2px; right:18px; display:flex; gap:3px; }
+.ola-edit-actions { position:absolute; top:12px; right:12px; display:flex; gap:4px; }
+.add-tile-btn {
+  width:100%; margin-top:8px; padding:8px; border-radius:7px;
+  border:1px dashed rgba(168,196,216,0.3); background:rgba(255,255,255,0.02);
+  color:#93c5fd; font-size:11px; font-weight:700; cursor:pointer;
+}
+.add-tile-btn:hover { background:rgba(0,95,163,0.12); border-color:var(--blue); }
+.ola-col.add-ola-col {
+  display:flex; align-items:center; justify-content:center;
+  border:1px dashed rgba(168,196,216,0.3); background:rgba(255,255,255,0.02);
+  min-height:160px; cursor:pointer; color:#93c5fd; font-size:12px; font-weight:700;
+}
+.ola-col.add-ola-col:hover { background:rgba(0,95,163,0.12); border-color:var(--blue); }
+.vision-edit-btn { margin-top:14px; }
+.vision-criteria li { position:relative; }
+.vc-edit-actions { position:absolute; top:10px; right:10px; display:flex; gap:4px; }
+.vc-add-card {
+  display:flex; align-items:center; justify-content:center;
+  border:1px dashed rgba(168,196,216,0.3); background:rgba(255,255,255,0.02);
+  min-height:80px; cursor:pointer; color:#93c5fd; font-size:12px; font-weight:700; border-radius:8px;
+}
+.vc-add-card:hover { background:rgba(0,95,163,0.12); border-color:var(--blue); }
+
+/* ── FORM MODAL ── */
+.form-modal {
+  position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+  width:min(640px, 94vw); max-height:88vh; overflow:auto;
+  background:#0c1e2f; border:1px solid rgba(168,196,216,0.2);
+  border-radius:12px; box-shadow:0 24px 60px rgba(0,0,0,0.45);
+  padding:20px 22px; z-index:810; display:none;
+}
+.form-modal.on { display:block; }
+.form-modal-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.form-modal-title { font-size:15px; font-weight:800; color:#fff; }
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px 12px; margin-bottom:14px; }
+.form-grid.full { grid-template-columns:1fr; }
+.f-field { display:flex; flex-direction:column; gap:4px; }
+.f-field.span2 { grid-column: 1 / -1; }
+.f-field label { font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--blue-light); }
+.f-field input, .f-field select, .f-field textarea {
+  font-family:inherit; font-size:12.5px; color:#fff;
+  background:rgba(255,255,255,0.05); border:1px solid rgba(168,196,216,0.18);
+  border-radius:6px; padding:7px 9px; resize:vertical;
+}
+.f-field textarea { min-height:56px; line-height:1.5; }
+.f-field input:focus, .f-field select:focus, .f-field textarea:focus { outline:none; border-color:var(--blue); }
+.f-field .hint-small { font-size:9.5px; color:#64748b; }
+.form-modal-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:6px; }
+.vision-row-editor { display:flex; flex-direction:column; gap:10px; margin-bottom:14px; }
+.vision-row-item { display:flex; gap:8px; align-items:flex-start; border:1px solid rgba(168,196,216,0.12); border-radius:8px; padding:10px; background:rgba(255,255,255,0.02); }
+.vision-row-item .f-field { flex:1; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-brand">
+    <span class="pse-badge">ACH</span>
+    <div>
+      <div class="header-title">ACH Waves</div>
+      <div class="header-sub" id="header-sub">Sube la plantilla Excel para visualizar el roadmap</div>
+    </div>
+  </div>
+  <div class="header-legend" id="header-legend" style="display:none;">
+    <div class="leg"><span class="leg-dot" style="background:#93c5fd"></span>B2C — Persona Natural</div>
+    <div class="leg"><span class="leg-dot" style="background:#86efac"></span>B2B — Persona Jurídica</div>
+    <div class="leg"><span class="leg-dot" style="background:#64748b"></span>Habilitación</div>
+  </div>
+  <div class="header-actions" id="header-actions" style="display:none;">
+    <button class="btn" id="btn-edit-toggle">✎ Editar</button>
+    <button class="btn" id="btn-export">💾 Descargar Excel</button>
+    <label class="btn" for="file-input-2">📤 Cambiar archivo</label>
+    <input id="file-input-2" type="file" accept=".xlsx" />
+    <button class="btn" id="btn-clear">🗑 Quitar datos</button>
+  </div>
+</header>
+
+<div id="empty-state" class="empty-wrap">
+  <div class="dropzone" id="dropzone">
+    <div class="dropzone-icon">📊</div>
+    <h2>Carga el Excel del roadmap</h2>
+    <p>Arrastra aquí la plantilla <strong>roadmap_pse_template_*.xlsx</strong> (con datos o vacía y ya llenada por
+      tu equipo) o haz clic para seleccionarla. Todo se procesa en tu navegador — el archivo no se envía a ningún
+      servidor.</p>
+    <label class="btn btn-primary" for="file-input-1">Seleccionar archivo Excel</label>
+    <input id="file-input-1" type="file" accept=".xlsx" />
+    <div class="status-msg" id="status-msg"></div>
+    <div class="hint">Hojas esperadas: Visión · Board de Fases · Casos de Uso · Habilitadores</div>
+  </div>
+</div>
+
+<div id="content" style="display:none;">
+  <section class="vision">
+    <div class="vision-content" id="vision-section"></div>
+  </section>
+
+  <div class="board">
+    <div class="scroll-hint">← Desplaza horizontalmente para ver todas las olas →</div>
+    <div class="olas-row" id="olas-row"></div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<div class="panel" id="panel">
+  <div class="panel-top">
+    <button class="panel-close" id="panel-close">✕</button>
+    <div class="panel-num" id="p-num"></div>
+    <div class="panel-title" id="p-title"></div>
+    <div class="panel-badges" id="p-badges"></div>
+  </div>
+  <div class="panel-body" id="p-body"></div>
+</div>
+
+<div class="hab-modal-overlay" id="hab-overlay"></div>
+<div class="hab-modal" id="hab-modal">
+  <div class="hab-modal-top">
+    <div>
+      <div class="hab-modal-id" id="hab-id"></div>
+      <div class="hab-modal-title" id="hab-title"></div>
+    </div>
+    <button class="hab-modal-close" id="hab-close">✕</button>
+  </div>
+  <div class="hab-modal-meta" id="hab-meta"></div>
+  <div class="hab-modal-body" id="hab-body"></div>
+  <div class="hab-modal-section" id="hab-enables-wrap">
+    <div class="hab-modal-section-title">Qué habilita</div>
+    <ul class="hab-list-mini" id="hab-enables"></ul>
+  </div>
+  <div class="hab-modal-section" id="hab-prereq-wrap">
+    <div class="hab-modal-section-title">Prerequisitos</div>
+    <ul class="hab-list-mini" id="hab-prereq"></ul>
+  </div>
+  <div class="hab-modal-section" id="hab-blocks-wrap">
+    <div class="hab-modal-section-title">Bloquea / Dependencias</div>
+    <ul class="hab-list-mini" id="hab-blocks"></ul>
+  </div>
+  <div class="hab-modal-section" id="hab-considerations-wrap">
+    <div class="hab-modal-section-title">Consideraciones clave</div>
+    <ul class="hab-list-mini" id="hab-considerations"></ul>
+  </div>
+</div>
+
+<div class="overlay" id="form-overlay"></div>
+<div class="form-modal" id="form-modal">
+  <div class="form-modal-top">
+    <div class="form-modal-title" id="form-modal-title">Editar</div>
+    <button class="hab-modal-close" id="form-modal-close">✕</button>
+  </div>
+  <div id="form-modal-body"></div>
+  <div class="form-modal-actions">
+    <button class="btn" id="form-cancel">Cancelar</button>
+    <button class="btn btn-primary" id="form-save">Guardar</button>
+  </div>
+</div>
+
+<div class="overlay" id="vision-overlay"></div>
+<div class="form-modal" id="vision-modal" style="width:min(760px,94vw);">
+  <div class="form-modal-top">
+    <div class="form-modal-title">Editar Visión del Programa</div>
+    <button class="hab-modal-close" id="vision-modal-close">✕</button>
+  </div>
+  <div class="vision-row-editor" id="vision-row-editor"></div>
+  <button class="add-tile-btn" id="vision-add-row" type="button">+ Agregar campo</button>
+  <div class="form-modal-actions">
+    <button class="btn" id="vision-cancel">Cancelar</button>
+    <button class="btn btn-primary" id="vision-save">Guardar</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+/* ===== CONFIG ===== */
+const STORAGE_KEY = "ach_waves_roadmap_data_v2";
+const SHEET_VISION = "Visión";
+const SHEET_FASES = "Board de Fases";
+const SHEET_CASOS = "Casos de Uso";
+const SHEET_HAB = "Habilitadores";
+const OLA_COLORS = { 0:"#37474F", 1:"#1A56A0", 2:"#00695C", 3:"#5B21B6", 4:"#B45309" };
+const OLA_COLOR_FALLBACK = "#334155";
+const OLA_PALETTE = ["#37474F","#1A56A0","#00695C","#5B21B6","#B45309","#0E7490","#9D174D","#3F6212","#7C2D12","#4C1D95"];
+
+let editMode = false;
+let uidSeq = 1;
+function nextUid(){ return "u" + (uidSeq++); }
+
+/* ===== HELPERS ===== */
+function olaColor(id){ return OLA_COLORS[id] ?? OLA_COLOR_FALLBACK; }
+function faseColor(f){ return (f && f.color) ? f.color : olaColor(f ? f.id : null); }
+function esc(s){ return (s ?? "").toString().replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])); }
+function cellStr(v){ return (v === undefined || v === null) ? "" : String(v).trim(); }
+function showStatus(msg, type){ const el = document.getElementById("status-msg"); el.textContent = msg; el.className = "status-msg " + (type || ""); }
+function cellList(v){
+  return cellStr(v).split(/\r?\n/).map(s => s.replace(/^[•\-•]\s*/, "").trim()).filter(Boolean);
+}
+function amClass(v){ return v>=8?'am-high':v>=5?'am-mid':'am-low'; }
+function amColor(v){ return v>=8?'#ef4444':v>=5?'#eab308':'#22c55e'; }
+function setList(id, arr){
+  const ul = document.getElementById(id);
+  const wrap = document.getElementById(id + "-wrap");
+  if (!arr || !arr.length){ if (wrap) wrap.style.display = "none"; return; }
+  if (wrap) wrap.style.display = "block";
+  ul.innerHTML = arr.map(x => `<li>${esc(x)}</li>`).join("");
+}
+
+/* ===== PARSE WORKBOOK ===== */
+function parseWorkbook(workbook){
+  const names = workbook.SheetNames;
+  const required = [SHEET_VISION, SHEET_FASES, SHEET_CASOS, SHEET_HAB];
+  const missing = required.filter(n => !names.includes(n));
+  if (missing.length){
+    throw new Error("Faltan hojas en el Excel: " + missing.join(", ") + ". Usa la plantilla ACH Waves original.");
+  }
+
+  const visionRaw = XLSX.utils.sheet_to_json(workbook.Sheets[SHEET_VISION], { header: 1, defval: "" });
+  const headerIdx = visionRaw.findIndex(r => cellStr(r[0]).toLowerCase() === "campo");
+  const vision = headerIdx === -1 ? [] : visionRaw.slice(headerIdx + 1)
+    .map(r => ({ campo: cellStr(r[0]), contenido: cellStr(r[1]) }))
+    .filter(r => r.campo)
+    .map(v => ({ ...v, _uid: nextUid() }));
+
+  const fasesRows = XLSX.utils.sheet_to_json(workbook.Sheets[SHEET_FASES], { defval: "" });
+  const fases = fasesRows
+    .map(r => ({
+      id: Number(r["ID Ola"]),
+      nombre: cellStr(r["Nombre de la Fase"]),
+      sub: cellStr(r["Subtítulo"]),
+      periodo: cellStr(r["Periodo"]),
+      dur: cellStr(r["Duración"]),
+      stretch: cellStr(r["¿Es Stretch Goal?"]),
+      color: cellStr(r["Color (hex)"]),
+      desc: cellStr(r["Descripción"]),
+    }))
+    .filter(f => f.nombre && !Number.isNaN(f.id))
+    .sort((a,b) => a.id - b.id)
+    .map(f => ({ ...f, _uid: nextUid() }));
+
+  const casosRows = XLSX.utils.sheet_to_json(workbook.Sheets[SHEET_CASOS], { defval: "" });
+  let casoSeq = 0;
+  const casos = casosRows
+    .map(r => ({
+      ola: Number(r["ID Ola"]),
+      segmento: cellStr(r["Segmento"]),
+      nombre: cellStr(r["Caso de Uso"]),
+      aporte: cellStr(r["Qué se disponibiliza en esta fase"]),
+      objetivo: cellStr(r["Objetivo Estratégico"]),
+      avance: cellStr(r["% Avance"]),
+      descripcion: cellStr(r["Descripción del Caso de Uso"]),
+      funcionalidades: cellList(r["Funcionalidades Clave"]),
+      trabajos: cellList(r["Trabajos por Resolver (JTBD)"]),
+      mercado: cellList(r["Potencial de Mercado"]),
+      amenaza: cellStr(r["Amenaza Competitiva (0-10)"]),
+      ingreso: cellStr(r["Ingreso Potencial"]),
+      validacion: cellStr(r["Validado con Mercado"]),
+      competencia: cellList(r["Competencia Relevante"]),
+    }))
+    .filter(c => c.nombre && !Number.isNaN(c.ola))
+    .map(c => ({ ...c, numero: ++casoSeq, _uid: nextUid() }));
+
+  const habRows = XLSX.utils.sheet_to_json(workbook.Sheets[SHEET_HAB], { defval: "" });
+  const habilitadores = habRows
+    .map(r => ({
+      ola: Number(r["ID Ola"]),
+      codigo: cellStr(r["Código Habilitador"]),
+      titulo: cellStr(r["Título del Habilitador"]),
+      desc: cellStr(r["Descripción"]),
+      capa: cellStr(r["Capa Arquitectónica"]),
+      prioridad: cellStr(r["Prioridad"]) || "Media",
+      habilita: cellList(r["Qué Habilita"]),
+      prerequisitos: cellList(r["Prerequisitos"]),
+      bloquea: cellList(r["Bloquea / Dependencias"]),
+      consideraciones: cellList(r["Consideraciones Clave"]),
+    }))
+    .filter(h => h.titulo && !Number.isNaN(h.ola))
+    .map(h => ({ ...h, _uid: nextUid() }));
+
+  if (!fases.length){
+    throw new Error("La hoja 'Board de Fases' no tiene filas válidas de datos.");
+  }
+
+  return { vision, fases, casos, habilitadores };
+}
+
+/* ===== RENDER: VISION ===== */
+function renderVision(vision){
+  const wrap = document.getElementById("vision-section");
+  if (!vision.length){ wrap.innerHTML = ""; return; }
+
+  const isIntro = v => /^resumen ejecutivo$/i.test(v.campo);
+  const isPilar = v => /^pilar/i.test(v.campo);
+  const isChip = v => /^(programa|duraci[oó]n|n[°º]?\s*de\s|numero de |n[uú]mero de )/i.test(v.campo);
+  const intro = vision.find(isIntro);
+  const pilares = vision.filter(isPilar);
+  const chips = vision.filter(v => !isIntro(v) && !isPilar(v) && isChip(v));
+  const footer = vision.find(v => !isIntro(v) && !isPilar(v) && !isChip(v) && /^objetivo general$/i.test(v.campo));
+  const otros = vision.filter(v => !isIntro(v) && !isPilar(v) && !isChip(v) && v !== footer);
+
+  const introHtml = intro ? `<div class="vision-intro">${esc(intro.contenido)}</div>` : "";
+  const chipsHtml = chips.length ? `<div class="vision-meta">${chips.map(v => `<span class="vision-meta-chip"><b>${esc(v.campo)}:</b> ${esc(v.contenido)}</span>`).join("")}</div>` : "";
+  const cardHtml = v => `<li>
+      ${editMode ? `<div class="vc-edit-actions">
+        <button class="icon-btn" type="button" data-vision-edit="${v._uid}" title="Editar">✎</button>
+        <button class="icon-btn danger" type="button" data-vision-delete="${v._uid}" title="Eliminar">🗑</button>
+      </div>` : ""}
+      <strong>${esc(v.campo.replace(/^pilar\s*\d*\s*[—-]?\s*/i, ""))}</strong><span>${esc(v.contenido)}</span></li>`;
+  const addCardHtml = editMode ? `<li class="vc-add-card" id="vc-add-card">+ Agregar pilar</li>` : "";
+  const pilaresHtml = (pilares.length || editMode) ? `
+    <ul class="vision-criteria">
+      ${pilares.map(cardHtml).join("")}
+      ${otros.map(cardHtml).join("")}
+      ${addCardHtml}
+    </ul>` : "";
+  const footerHtml = footer ? `<div class="vision-footer">${esc(footer.contenido)}</div>` : "";
+  const editBtnHtml = editMode ? `<button class="btn vision-edit-btn" id="btn-vision-manage">✎ Editar información general</button>` : "";
+
+  wrap.innerHTML = `${introHtml}${chipsHtml}${pilaresHtml}${footerHtml}${editBtnHtml}`;
+
+  if (editMode){
+    wrap.querySelectorAll("[data-vision-edit]").forEach(el => el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const v = DATA.vision.find(x => x._uid === el.dataset.visionEdit);
+      openForm("vision", v);
+    }));
+    wrap.querySelectorAll("[data-vision-delete]").forEach(el => el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (!confirm("¿Eliminar este campo de la Visión?")) return;
+      DATA.vision = DATA.vision.filter(x => x._uid !== el.dataset.visionDelete);
+      persist(); renderAll(DATA);
+    }));
+    const addCard = document.getElementById("vc-add-card");
+    if (addCard) addCard.addEventListener("click", () => openForm("vision", null));
+    const manageBtn = document.getElementById("btn-vision-manage");
+    if (manageBtn) manageBtn.addEventListener("click", openVisionManager);
+  }
+}
+
+/* ===== RENDER: BOARD ===== */
+let activeCard = null;
+
+function renderBoard(data){
+  const row = document.getElementById("olas-row");
+  row.innerHTML = "";
+
+  data.fases.forEach(f => {
+    const casos = data.casos.filter(c => c.ola === f.id);
+    const habs = data.habilitadores.filter(h => h.ola === f.id);
+    const color = faseColor(f);
+    const headStyle = `background: linear-gradient(135deg, ${color}cc, ${color}88);`;
+
+    const col = document.createElement("div");
+    col.className = "ola-col";
+
+    const cuCards = casos.map(c => {
+      const seg = (c.segmento || "").toUpperCase();
+      return `<div class="cu-card" data-uid="${c._uid}">
+        <div class="cu-row">
+          <div class="cu-name">${esc(c.nombre)}</div>
+          <div class="cu-tags">
+            ${seg ? `<span class="tag ${seg==='B2B'?'tag-b2b':'tag-b2c'}">${esc(seg)}</span>` : ""}
+            <span class="tag tag-num">${String(c.numero).padStart(2,'0')}</span>
+            ${editMode ? `<div class="cu-edit-actions">
+              <button class="icon-btn" type="button" data-caso-edit="${c._uid}" title="Editar">✎</button>
+              <button class="icon-btn danger" type="button" data-caso-delete="${c._uid}" title="Eliminar">🗑</button>
+            </div>` : ""}
+          </div>
+        </div>
+        <div class="cu-alcance">${esc(c.aporte || c.descripcion)}</div>
+      </div>`;
+    }).join("") || `<div class="hab-empty">Sin casos de uso registrados.</div>`;
+
+    const habItems = habs.map(h => `
+      <li class="hab-item">
+        <span class="hab-item-text">${esc(h.codigo)}${h.codigo ? " · " : ""}${esc(h.titulo)}</span>
+        ${editMode ? `<div class="hab-edit-actions">
+          <button class="icon-btn" type="button" data-hab-edit="${h._uid}" title="Editar">✎</button>
+          <button class="icon-btn danger" type="button" data-hab-delete="${h._uid}" title="Eliminar">🗑</button>
+        </div>` : ""}
+        <button class="hab-info-btn" type="button" data-hab-info="${h._uid}" title="Ver detalle ${esc(h.codigo)}">i</button>
+      </li>`).join("") || `<li class="hab-empty">Sin habilitadores registrados.</li>`;
+
+    col.innerHTML = `
+      <div class="ola-head" style="${headStyle}">
+        ${editMode ? `<div class="ola-edit-actions">
+          <button class="icon-btn" type="button" data-ola-edit="${f._uid}" title="Editar ola">✎</button>
+          <button class="icon-btn danger" type="button" data-ola-delete="${f._uid}" title="Eliminar ola">🗑</button>
+        </div>` : ""}
+        <div class="ola-eyebrow">Ola ${esc(f.id)}</div>
+        <div class="ola-name">${esc(f.nombre)}</div>
+        <div class="ola-sub">${esc(f.sub)}</div>
+        ${f.desc ? `<div class="ola-desc">${esc(f.desc)}</div>` : ""}
+        <div>
+          <span class="ola-periodo">📅 ${esc(f.periodo)} · ${esc(f.dur)}</span>
+          ${/^s/i.test(f.stretch) ? `<span class="ola-stretch">STRETCH</span>` : ""}
+        </div>
+      </div>
+      <div class="ola-body">
+        <div class="section-label">Habilitación</div>
+        <ul class="hab-list">${habItems}</ul>
+        ${editMode ? `<button class="add-tile-btn" type="button" data-add-hab="${f.id}">+ Agregar habilitador</button>` : ""}
+        <div class="section-label" style="margin-top:14px;">Casos de Uso</div>
+        <div class="cu-stack">${cuCards}</div>
+        ${editMode ? `<button class="add-tile-btn" type="button" data-add-caso="${f.id}">+ Agregar caso de uso</button>` : ""}
+      </div>`;
+    row.appendChild(col);
+  });
+
+  if (editMode){
+    const addOlaCol = document.createElement("div");
+    addOlaCol.className = "ola-col add-ola-col";
+    addOlaCol.id = "add-ola-col";
+    addOlaCol.textContent = "+ Agregar Ola";
+    row.appendChild(addOlaCol);
+    addOlaCol.addEventListener("click", () => openForm("ola", null));
+  }
+
+  row.querySelectorAll(".cu-card").forEach(el => {
+    el.addEventListener("click", (e) => {
+      if (e.target.closest(".cu-edit-actions")) return;
+      const caso = DATA.casos.find(c => c._uid === el.dataset.uid);
+      openPanel(caso, el);
+    });
+  });
+  row.querySelectorAll("[data-caso-edit]").forEach(el => el.addEventListener("click", (e) => {
+    e.stopPropagation();
+    openForm("caso", DATA.casos.find(c => c._uid === el.dataset.casoEdit));
+  }));
+  row.querySelectorAll("[data-caso-delete]").forEach(el => el.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (!confirm("¿Eliminar este caso de uso?")) return;
+    DATA.casos = DATA.casos.filter(c => c._uid !== el.dataset.casoDelete);
+    persist(); renderAll(DATA);
+  }));
+  row.querySelectorAll("[data-hab-info]").forEach(el => {
+    el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openHabModal(DATA.habilitadores.find(h => h._uid === el.dataset.habInfo));
+    });
+  });
+  row.querySelectorAll("[data-hab-edit]").forEach(el => el.addEventListener("click", (e) => {
+    e.stopPropagation();
+    openForm("hab", DATA.habilitadores.find(h => h._uid === el.dataset.habEdit));
+  }));
+  row.querySelectorAll("[data-hab-delete]").forEach(el => el.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (!confirm("¿Eliminar este habilitador?")) return;
+    DATA.habilitadores = DATA.habilitadores.filter(h => h._uid !== el.dataset.habDelete);
+    persist(); renderAll(DATA);
+  }));
+  row.querySelectorAll("[data-ola-edit]").forEach(el => el.addEventListener("click", (e) => {
+    e.stopPropagation();
+    openForm("ola", DATA.fases.find(f => f._uid === el.dataset.olaEdit));
+  }));
+  row.querySelectorAll("[data-ola-delete]").forEach(el => el.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const f = DATA.fases.find(x => x._uid === el.dataset.olaDelete);
+    if (!f) return;
+    if (!confirm(`¿Eliminar la ola "${f.nombre}"? También se eliminarán sus casos de uso y habilitadores.`)) return;
+    DATA.casos = DATA.casos.filter(c => c.ola !== f.id);
+    DATA.habilitadores = DATA.habilitadores.filter(h => h.ola !== f.id);
+    DATA.fases = DATA.fases.filter(x => x._uid !== f._uid);
+    persist(); renderAll(DATA);
+  }));
+  row.querySelectorAll("[data-add-caso]").forEach(el => el.addEventListener("click", () => {
+    openForm("caso", null, { ola: Number(el.dataset.addCaso) });
+  }));
+  row.querySelectorAll("[data-add-hab]").forEach(el => el.addEventListener("click", () => {
+    openForm("hab", null, { ola: Number(el.dataset.addHab) });
+  }));
+}
+
+/* ===== PANEL: CASO DE USO ===== */
+function openPanel(c, card){
+  if (activeCard) activeCard.classList.remove("is-active");
+  if (card){ card.classList.add("is-active"); activeCard = card; }
+
+  document.getElementById("p-num").textContent = `CU ${String(c.numero).padStart(2,'0')}${c.segmento ? " · " + c.segmento : ""}`;
+  document.getElementById("p-title").textContent = c.nombre;
+  const amenazaNum = c.amenaza !== "" ? Number(c.amenaza) : null;
+  document.getElementById("p-badges").innerHTML = `
+    ${c.objetivo ? `<span class="badge badge-obj">${esc(c.objetivo)}</span>` : ""}
+    ${c.avance !== "" ? `<span class="badge badge-av">Avance ${esc(c.avance)}%</span>` : ""}
+    ${c.validacion ? `<span class="badge badge-val">Validado: ${esc(c.validacion)}</span>` : ""}
+    ${c.ingreso ? `<span class="badge badge-ing">Ingreso: ${esc(c.ingreso)}</span>` : ""}
+    ${amenazaNum !== null && !Number.isNaN(amenazaNum) ? `<span class="badge badge-am ${amClass(amenazaNum)}">Amenaza ${esc(c.amenaza)}/10</span>` : ""}
+    ${c.segmento ? `<span class="tag ${c.segmento.toUpperCase()==='B2B'?'tag-b2b':'tag-b2c'}" style="font-size:11px;padding:4px 9px;">${esc(c.segmento)}</span>` : ""}`;
+
+  let body = "";
+  if (c.aporte){
+    body += `<div class="p-section"><div class="p-alcance-box"><div class="p-alcance-lbl">Alcance en esta ola</div><div class="p-alcance-txt">${esc(c.aporte)}</div></div></div>`;
+  }
+  if (c.descripcion){
+    body += `<div class="p-section"><div class="p-stitle">Descripción</div><div class="p-desc">${esc(c.descripcion)}</div></div>`;
+  }
+  if (c.trabajos.length){
+    body += `<div class="p-section"><div class="p-stitle">Trabajos que resuelve</div><ul class="p-list">${c.trabajos.map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div>`;
+  }
+  if (c.funcionalidades.length){
+    body += `<div class="p-section"><div class="p-stitle">Funcionalidades Clave</div><ul class="p-list">${c.funcionalidades.map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div>`;
+  }
+  if (c.mercado.length){
+    body += `<div class="p-section"><div class="p-stitle">Potencial de Mercado</div>${c.mercado.map(m=>`<div class="p-mkt-item">${esc(m)}</div>`).join("")}</div>`;
+  }
+  if (amenazaNum !== null && !Number.isNaN(amenazaNum) || c.avance !== "" || c.ingreso || c.validacion){
+    const av = Math.max(0, Math.min(100, Number(c.avance) || 0));
+    body += `<div class="p-section"><div class="p-stitle">Indicadores</div><div class="p-grid">
+      ${amenazaNum !== null && !Number.isNaN(amenazaNum) ? `<div class="p-stat"><div class="p-stat-lbl">Amenaza competitiva</div><div class="p-stat-val">${esc(c.amenaza)}/10</div><div class="p-threat"><div class="p-threat-fill" style="width:${amenazaNum*10}%;background:${amColor(amenazaNum)}"></div></div></div>` : ""}
+      ${c.ingreso ? `<div class="p-stat"><div class="p-stat-lbl">Ingreso potencial</div><div class="p-stat-val ${c.ingreso.startsWith('Alto')?'g':'y'}">${esc(c.ingreso)}</div></div>` : ""}
+      ${c.avance !== "" ? `<div class="p-stat"><div class="p-stat-lbl">% Avance actual</div><div class="p-stat-val">${esc(c.avance)}%</div><div class="p-threat"><div class="p-threat-fill" style="width:${av}%"></div></div></div>` : ""}
+      ${c.validacion ? `<div class="p-stat"><div class="p-stat-lbl">Validado con mercado</div><div class="p-stat-val ${c.validacion==='Sí'?'g':'y'}">${esc(c.validacion)}</div></div>` : ""}
+    </div></div>`;
+  }
+  if (c.competencia.length){
+    body += `<div class="p-section"><div class="p-stitle">Competencia relevante</div><div class="p-comp-chips">${c.competencia.map(x=>`<span class="p-comp-chip">${esc(x)}</span>`).join("")}</div></div>`;
+  }
+  document.getElementById("p-body").innerHTML = body;
+
+  document.getElementById("overlay").classList.add("on");
+  document.getElementById("panel").classList.add("on");
+}
+function closePanel(){
+  document.getElementById("overlay").classList.remove("on");
+  document.getElementById("panel").classList.remove("on");
+  if (activeCard){ activeCard.classList.remove("is-active"); activeCard = null; }
+}
+
+/* ===== MODAL: HABILITADOR ===== */
+function openHabModal(h){
+  if (!h) return;
+  document.getElementById("hab-id").textContent = h.codigo || "Habilitador";
+  document.getElementById("hab-title").textContent = h.titulo;
+  document.getElementById("hab-meta").innerHTML = `
+    <span class="hab-chip">Ola ${esc(h.ola)}</span>
+    ${h.capa ? `<span class="hab-chip">${esc(h.capa)}</span>` : ""}
+    <span class="hab-chip">Prioridad: ${esc(h.prioridad)}</span>`;
+  document.getElementById("hab-body").textContent = h.desc || "Sin descripción disponible.";
+  setList("hab-enables", h.habilita);
+  setList("hab-prereq", h.prerequisitos);
+  setList("hab-blocks", h.bloquea);
+  setList("hab-considerations", h.consideraciones);
+  document.getElementById("hab-overlay").classList.add("on");
+  document.getElementById("hab-modal").classList.add("on");
+}
+function closeHabModal(){
+  document.getElementById("hab-overlay").classList.remove("on");
+  document.getElementById("hab-modal").classList.remove("on");
+}
+
+/* ===== PERSIST ===== */
+function persist(){
+  if (!DATA) return;
+  const raw = localStorage.getItem(STORAGE_KEY);
+  let meta = { fileName: "roadmap.xlsx", loadedAt: Date.now() };
+  try { const parsed = raw ? JSON.parse(raw) : null; if (parsed?.meta) meta = parsed.meta; } catch(e){}
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ data: DATA, meta }));
+}
+
+/* ===== FORM MODAL (Ola / Caso de Uso / Habilitador / Vision row) ===== */
+let formCtx = { type: null, entity: null, defaults: null };
+
+function f(label, name, value, opts){
+  opts = opts || {};
+  const val = value === undefined || value === null ? "" : value;
+  let input;
+  if (opts.select){
+    input = `<select name="${name}">${opts.select.map(o => `<option value="${esc(o)}" ${String(val)===String(o)?"selected":""}>${esc(o)}</option>`).join("")}</select>`;
+  } else if (opts.textarea){
+    input = `<textarea name="${name}" ${opts.rows?`rows="${opts.rows}"`:""}>${esc(val)}</textarea>`;
+  } else {
+    input = `<input type="${opts.type||'text'}" name="${name}" value="${esc(val)}" ${opts.min!==undefined?`min="${opts.min}"`:""} ${opts.max!==undefined?`max="${opts.max}"`:""} ${opts.readonly?"readonly":""}>`;
+  }
+  return `<div class="f-field ${opts.span2?'span2':''}"><label>${esc(label)}</label>${input}${opts.hint?`<span class="hint-small">${esc(opts.hint)}</span>`:""}</div>`;
+}
+function listVal(arr){ return (arr||[]).join("\n"); }
+
+function formFieldsOla(o){
+  o = o || {};
+  return `<div class="form-grid">
+    ${f("ID Ola", "id", o.id, { type:"number", readonly: !!o._uid, hint: o._uid ? "No editable en una ola existente" : "Debe ser único" })}
+    ${f("Nombre de la Fase", "nombre", o.nombre)}
+    ${f("Subtítulo", "sub", o.sub)}
+    ${f("Periodo", "periodo", o.periodo)}
+    ${f("Duración", "dur", o.dur)}
+    ${f("¿Es Stretch Goal?", "stretch", o.stretch || "No", { select:["No","Sí"] })}
+    ${f("Color", "color", o.color || "", { type:"color" })}
+    ${f("Descripción", "desc", o.desc, { textarea:true, span2:true, rows:3 })}
+  </div>`;
+}
+function formFieldsCaso(c, defaults){
+  c = c || defaults || {};
+  const olaOptions = DATA.fases.map(x => String(x.id));
+  return `<div class="form-grid">
+    ${f("ID Ola", "ola", c.ola, { select: olaOptions })}
+    ${f("Segmento", "segmento", c.segmento || "B2C", { select:["B2C","B2B"] })}
+    ${f("Caso de Uso", "nombre", c.nombre, { span2:true })}
+    ${f("Qué se disponibiliza en esta fase", "aporte", c.aporte, { textarea:true, span2:true, rows:2 })}
+    ${f("Objetivo Estratégico", "objetivo", c.objetivo, { span2:true })}
+    ${f("% Avance", "avance", c.avance, { type:"number", min:0, max:100 })}
+    ${f("Amenaza Competitiva (0-10)", "amenaza", c.amenaza, { type:"number", min:0, max:10 })}
+    ${f("Ingreso Potencial", "ingreso", c.ingreso)}
+    ${f("Validado con Mercado", "validacion", c.validacion || "Parcial", { select:["Sí","No","Parcial"] })}
+    ${f("Descripción del Caso de Uso", "descripcion", c.descripcion, { textarea:true, span2:true, rows:3 })}
+    ${f("Funcionalidades Clave (una por línea)", "funcionalidades", listVal(c.funcionalidades), { textarea:true, span2:true, rows:3 })}
+    ${f("Trabajos por Resolver — JTBD (una por línea)", "trabajos", listVal(c.trabajos), { textarea:true, span2:true, rows:3 })}
+    ${f("Potencial de Mercado (una por línea)", "mercado", listVal(c.mercado), { textarea:true, span2:true, rows:2 })}
+    ${f("Competencia Relevante (una por línea)", "competencia", listVal(c.competencia), { textarea:true, span2:true, rows:2 })}
+  </div>`;
+}
+function formFieldsHab(h, defaults){
+  h = h || defaults || {};
+  const olaOptions = DATA.fases.map(x => String(x.id));
+  return `<div class="form-grid">
+    ${f("ID Ola", "ola", h.ola, { select: olaOptions })}
+    ${f("Código Habilitador", "codigo", h.codigo, { hint:"p. ej. HAB-33" })}
+    ${f("Título del Habilitador", "titulo", h.titulo, { span2:true })}
+    ${f("Capa Arquitectónica", "capa", h.capa)}
+    ${f("Prioridad", "prioridad", h.prioridad || "Media", { select:["Bloqueante","Crítica","Alta","Media","Baja"] })}
+    ${f("Descripción", "desc", h.desc, { textarea:true, span2:true, rows:3 })}
+    ${f("Qué Habilita (una por línea)", "habilita", listVal(h.habilita), { textarea:true, span2:true, rows:2 })}
+    ${f("Prerequisitos (una por línea)", "prerequisitos", listVal(h.prerequisitos), { textarea:true, span2:true, rows:2 })}
+    ${f("Bloquea / Dependencias (una por línea)", "bloquea", listVal(h.bloquea), { textarea:true, span2:true, rows:2 })}
+    ${f("Consideraciones Clave (una por línea)", "consideraciones", listVal(h.consideraciones), { textarea:true, span2:true, rows:2 })}
+  </div>`;
+}
+function formFieldsVision(v){
+  v = v || {};
+  return `<div class="form-grid full">
+    ${f("Campo", "campo", v.campo, { hint:'Ej: "Pilar 3 — Título" para que aparezca como tarjeta de visión' })}
+    ${f("Contenido", "contenido", v.contenido, { textarea:true, rows:4 })}
+  </div>`;
+}
+
+const FORM_TITLES = { ola:"Ola", caso:"Caso de Uso", hab:"Habilitador", vision:"Campo de Visión" };
+
+function openForm(type, entity, defaults){
+  formCtx = { type, entity, defaults: defaults || null };
+  document.getElementById("form-modal-title").textContent = (entity ? "Editar " : "Agregar ") + FORM_TITLES[type];
+  const body = document.getElementById("form-modal-body");
+  if (type === "ola") body.innerHTML = formFieldsOla(entity || defaults);
+  else if (type === "caso") body.innerHTML = formFieldsCaso(entity, defaults);
+  else if (type === "hab") body.innerHTML = formFieldsHab(entity, defaults);
+  else if (type === "vision") body.innerHTML = formFieldsVision(entity);
+  document.getElementById("form-overlay").classList.add("on");
+  document.getElementById("form-modal").classList.add("on");
+}
+function closeForm(){
+  document.getElementById("form-overlay").classList.remove("on");
+  document.getElementById("form-modal").classList.remove("on");
+  formCtx = { type: null, entity: null, defaults: null };
+}
+function readFormValues(){
+  const body = document.getElementById("form-modal-body");
+  const values = {};
+  body.querySelectorAll("input,select,textarea").forEach(el => { values[el.name] = el.value; });
+  return values;
+}
+function saveForm(){
+  const { type, entity, defaults } = formCtx;
+  const v = readFormValues();
+  if (type === "ola"){
+    if (entity){
+      Object.assign(entity, { nombre: v.nombre.trim(), sub: v.sub.trim(), periodo: v.periodo.trim(), dur: v.dur.trim(), stretch: v.stretch, color: v.color, desc: v.desc.trim() });
+    } else {
+      const id = Number(v.id);
+      if (Number.isNaN(id)){ alert("El ID de la ola debe ser un número."); return; }
+      if (DATA.fases.some(x => x.id === id)){ alert("Ya existe una ola con ese ID."); return; }
+      DATA.fases.push({ _uid: nextUid(), id, nombre: v.nombre.trim(), sub: v.sub.trim(), periodo: v.periodo.trim(), dur: v.dur.trim(), stretch: v.stretch, color: v.color || OLA_PALETTE[DATA.fases.length % OLA_PALETTE.length], desc: v.desc.trim() });
+    }
+    DATA.fases.sort((a,b) => a.id - b.id);
+  } else if (type === "caso"){
+    if (!v.nombre.trim()){ alert("El caso de uso necesita un nombre."); return; }
+    const payload = {
+      ola: Number(v.ola), segmento: v.segmento, nombre: v.nombre.trim(), aporte: v.aporte.trim(),
+      objetivo: v.objetivo.trim(), avance: v.avance, descripcion: v.descripcion.trim(),
+      funcionalidades: cellList(v.funcionalidades), trabajos: cellList(v.trabajos),
+      mercado: cellList(v.mercado), amenaza: v.amenaza, ingreso: v.ingreso.trim(),
+      validacion: v.validacion, competencia: cellList(v.competencia),
+    };
+    if (entity){ Object.assign(entity, payload); }
+    else { DATA.casos.push({ _uid: nextUid(), numero: 0, ...payload }); renumberCasos(); }
+  } else if (type === "hab"){
+    if (!v.titulo.trim()){ alert("El habilitador necesita un título."); return; }
+    const payload = {
+      ola: Number(v.ola), codigo: v.codigo.trim(), titulo: v.titulo.trim(), desc: v.desc.trim(),
+      capa: v.capa.trim(), prioridad: v.prioridad,
+      habilita: cellList(v.habilita), prerequisitos: cellList(v.prerequisitos),
+      bloquea: cellList(v.bloquea), consideraciones: cellList(v.consideraciones),
+    };
+    if (entity){ Object.assign(entity, payload); }
+    else { DATA.habilitadores.push({ _uid: nextUid(), ...payload }); }
+  } else if (type === "vision"){
+    if (!v.campo.trim()){ alert("El campo necesita un nombre."); return; }
+    if (entity){ Object.assign(entity, { campo: v.campo.trim(), contenido: v.contenido.trim() }); }
+    else { DATA.vision.push({ _uid: nextUid(), campo: v.campo.trim(), contenido: v.contenido.trim() }); }
+  }
+  persist();
+  closeForm();
+  renderAll(DATA);
+}
+function renumberCasos(){
+  let seq = 0;
+  DATA.casos.forEach(c => { c.numero = ++seq; });
+}
+
+document.getElementById("form-cancel").addEventListener("click", closeForm);
+document.getElementById("form-modal-close").addEventListener("click", closeForm);
+document.getElementById("form-overlay").addEventListener("click", closeForm);
+document.getElementById("form-save").addEventListener("click", saveForm);
+
+/* ===== VISION MANAGER (bulk edit of all Visión rows) ===== */
+function openVisionManager(){
+  renderVisionEditor();
+  document.getElementById("vision-overlay").classList.add("on");
+  document.getElementById("vision-modal").classList.add("on");
+}
+function closeVisionManager(){
+  document.getElementById("vision-overlay").classList.remove("on");
+  document.getElementById("vision-modal").classList.remove("on");
+}
+function renderVisionEditor(){
+  const wrap = document.getElementById("vision-row-editor");
+  wrap.innerHTML = DATA.vision.map((v, i) => `
+    <div class="vision-row-item" data-idx="${i}">
+      <div class="f-field"><label>Campo</label><input type="text" class="vr-campo" value="${esc(v.campo)}"></div>
+      <div class="f-field" style="flex:2;"><label>Contenido</label><textarea class="vr-contenido" rows="2">${esc(v.contenido)}</textarea></div>
+      <button class="icon-btn danger" type="button" data-remove-row="${i}" title="Eliminar" style="margin-top:18px;">🗑</button>
+    </div>`).join("");
+  wrap.querySelectorAll("[data-remove-row]").forEach(btn => btn.addEventListener("click", () => {
+    const idx = Number(btn.dataset.removeRow);
+    DATA.vision.splice(idx, 1);
+    renderVisionEditor();
+  }));
+}
+document.getElementById("vision-add-row").addEventListener("click", () => {
+  DATA.vision.push({ _uid: nextUid(), campo: "", contenido: "" });
+  renderVisionEditor();
+});
+document.getElementById("vision-cancel").addEventListener("click", closeVisionManager);
+document.getElementById("vision-modal-close").addEventListener("click", closeVisionManager);
+document.getElementById("vision-overlay").addEventListener("click", closeVisionManager);
+document.getElementById("vision-save").addEventListener("click", () => {
+  const rows = document.querySelectorAll("#vision-row-editor .vision-row-item");
+  const updated = [];
+  rows.forEach(row => {
+    const campo = row.querySelector(".vr-campo").value.trim();
+    const contenido = row.querySelector(".vr-contenido").value.trim();
+    if (campo) updated.push({ _uid: nextUid(), campo, contenido });
+  });
+  DATA.vision = updated;
+  persist();
+  closeVisionManager();
+  renderAll(DATA);
+});
+
+/* ===== EXPORT TO XLSX ===== */
+function bulletsJoin(arr){ return (arr || []).map(x => "• " + x).join("\n"); }
+function buildWorkbookBlob(){
+  if (!DATA) return null;
+  const wb = XLSX.utils.book_new();
+
+  const visionRows = [["VISIÓN DEL PROGRAMA", ""], ["", ""], ["Campo", "Contenido"]];
+  DATA.vision.forEach(v => visionRows.push([v.campo, v.contenido]));
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(visionRows), SHEET_VISION);
+
+  const fasesHeaders = ["ID Ola","Nombre de la Fase","Subtítulo","Periodo","Duración","¿Es Stretch Goal?","Color (hex)","Descripción"];
+  const fasesRows = [fasesHeaders, ...DATA.fases.map(fs => [fs.id, fs.nombre, fs.sub, fs.periodo, fs.dur, fs.stretch, fs.color || "", fs.desc])];
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(fasesRows), SHEET_FASES);
+
+  const casosHeaders = ["ID Ola","Segmento","Caso de Uso","Qué se disponibiliza en esta fase","Objetivo Estratégico","% Avance","Descripción del Caso de Uso","Funcionalidades Clave","Trabajos por Resolver (JTBD)","Potencial de Mercado","Amenaza Competitiva (0-10)","Ingreso Potencial","Validado con Mercado","Competencia Relevante"];
+  const casosRows = [casosHeaders, ...DATA.casos.map(c => [
+    c.ola, c.segmento, c.nombre, c.aporte, c.objetivo, c.avance === "" ? "" : Number(c.avance), c.descripcion,
+    bulletsJoin(c.funcionalidades), bulletsJoin(c.trabajos), bulletsJoin(c.mercado),
+    c.amenaza === "" ? "" : Number(c.amenaza), c.ingreso, c.validacion, bulletsJoin(c.competencia),
+  ])];
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(casosRows), SHEET_CASOS);
+
+  const habHeaders = ["ID Ola","Código Habilitador","Título del Habilitador","Descripción","Capa Arquitectónica","Prioridad","Qué Habilita","Prerequisitos","Bloquea / Dependencias","Consideraciones Clave"];
+  const habRows = [habHeaders, ...DATA.habilitadores.map(h => [
+    h.ola, h.codigo, h.titulo, h.desc, h.capa, h.prioridad,
+    bulletsJoin(h.habilita), bulletsJoin(h.prerequisitos), bulletsJoin(h.bloquea), bulletsJoin(h.consideraciones),
+  ])];
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(habRows), SHEET_HAB);
+
+  const programaRow = DATA.vision.find(v => /^programa$/i.test(v.campo));
+  const slug = (programaRow ? programaRow.contenido : "roadmap").toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "").slice(0, 40) || "roadmap";
+  const stamp = new Date().toISOString().slice(0, 10);
+  const filename = `${slug}_${stamp}.xlsx`;
+
+  const arrayBuf = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+  const blob = new Blob([arrayBuf], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+  const url = URL.createObjectURL(blob);
+  return { url, filename };
+}
+
+function triggerDownload(url, filename){
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.rel = "noopener";
+  a.style.display = "none";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function showExportFallback(url, filename){
+  let box = document.getElementById("export-fallback");
+  if (!box){
+    box = document.createElement("div");
+    box.id = "export-fallback";
+    box.style.cssText = "position:fixed;bottom:16px;right:16px;z-index:900;background:#0c1e2f;border:1px solid rgba(168,196,216,0.25);border-radius:8px;padding:12px 14px;font-size:12px;color:#cbd5e1;max-width:280px;box-shadow:0 12px 30px rgba(0,0,0,0.4);";
+    document.body.appendChild(box);
+  }
+  box.innerHTML = `Si la descarga no inici\u00f3 autom\u00e1ticamente, <a href="${url}" download="${esc(filename)}" style="color:#60a5fa;font-weight:700;">haz clic aqu\u00ed para descargar ${esc(filename)}</a>. <button type="button" id="export-fallback-close" style="margin-left:6px;background:none;border:none;color:#64748b;cursor:pointer;">\u2715</button>`;
+  document.getElementById("export-fallback-close").addEventListener("click", () => box.remove());
+}
+
+document.getElementById("btn-export").addEventListener("click", () => {
+  try {
+    const built = buildWorkbookBlob();
+    if (!built) return;
+    triggerDownload(built.url, built.filename);
+    showStatus("Excel exportado: " + built.filename, "ok");
+    showExportFallback(built.url, built.filename);
+    setTimeout(() => URL.revokeObjectURL(built.url), 60000);
+  } catch (err){
+    console.error(err);
+    showStatus("No se pudo exportar el Excel: " + (err.message || err), "error");
+    alert("No se pudo generar la descarga autom\u00e1ticamente. Es posible que el sitio donde est\u00e1 incrustada esta p\u00e1gina bloquee las descargas (por ejemplo, si est\u00e1 dentro de un iframe/embed). Abre esta p\u00e1gina en su propia pesta\u00f1a/URL para exportar.\n\nDetalle: " + (err.message || err));
+  }
+});
+
+/* ===== EDIT MODE TOGGLE ===== */
+document.getElementById("btn-edit-toggle").addEventListener("click", () => {
+  editMode = !editMode;
+  const btn = document.getElementById("btn-edit-toggle");
+  btn.textContent = editMode ? "👁 Ver" : "✎ Editar";
+  btn.classList.toggle("btn-edit-on", editMode);
+  if (DATA) renderAll(DATA);
+});
+
+document.getElementById("panel-close").addEventListener("click", closePanel);
+document.getElementById("overlay").addEventListener("click", closePanel);
+document.getElementById("hab-close").addEventListener("click", closeHabModal);
+document.getElementById("hab-overlay").addEventListener("click", closeHabModal);
+document.addEventListener("keydown", e => { if (e.key === "Escape"){ closePanel(); closeHabModal(); } });
+
+/* ===== RENDER ALL ===== */
+let DATA = null;
+
+function renderAll(data, meta){
+  renderVision(data.vision);
+  renderBoard(data);
+
+  const programaRow = data.vision.find(v => /^programa$/i.test(v.campo));
+  const durRow = data.vision.find(v => /duraci[oó]n/i.test(v.campo));
+  const parts = [];
+  if (programaRow) parts.push(programaRow.contenido);
+  if (durRow) parts.push(durRow.contenido);
+  parts.push(`${data.fases.length} olas de implementación`);
+  const casosUnicos = new Set(data.casos.map(c => c.nombre)).size;
+  parts.push(`${casosUnicos} casos de uso`);
+  document.getElementById("header-sub").textContent = parts.join(" · ");
+
+  document.getElementById("empty-state").style.display = "none";
+  document.getElementById("content").style.display = "block";
+  document.getElementById("header-actions").style.display = "flex";
+  document.getElementById("header-legend").style.display = "flex";
+}
+
+/* ===== FILE HANDLING ===== */
+function handleFile(file){
+  if (!file) return;
+  if (!/\.xlsx$/i.test(file.name)){
+    showStatus("El archivo debe ser un .xlsx generado con la plantilla ACH Waves.", "error");
+    return;
+  }
+  showStatus("Procesando archivo…", "");
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const wb = XLSX.read(e.target.result, { type: "array" });
+      const data = parseWorkbook(wb);
+      const meta = { fileName: file.name, loadedAt: Date.now() };
+      DATA = data;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ data, meta }));
+      showStatus("Archivo cargado correctamente.", "ok");
+      renderAll(data, meta);
+    } catch (err){
+      console.error(err);
+      showStatus(err.message || "No se pudo leer el archivo. Verifica que uses la plantilla ACH Waves.", "error");
+    }
+  };
+  reader.onerror = () => showStatus("Error leyendo el archivo.", "error");
+  reader.readAsArrayBuffer(file);
+}
+
+document.getElementById("file-input-1").addEventListener("change", (e) => handleFile(e.target.files[0]));
+document.getElementById("file-input-2").addEventListener("change", (e) => handleFile(e.target.files[0]));
+
+const dropzone = document.getElementById("dropzone");
+["dragenter","dragover"].forEach(evt => dropzone.addEventListener(evt, (e) => { e.preventDefault(); e.stopPropagation(); dropzone.classList.add("dragover"); }));
+["dragleave","drop"].forEach(evt => dropzone.addEventListener(evt, (e) => { e.preventDefault(); e.stopPropagation(); dropzone.classList.remove("dragover"); }));
+dropzone.addEventListener("drop", (e) => { const file = e.dataTransfer.files && e.dataTransfer.files[0]; handleFile(file); });
+
+document.getElementById("btn-clear").addEventListener("click", () => {
+  if (!confirm("¿Quitar los datos cargados de este navegador? El archivo Excel original no se modifica.")) return;
+  localStorage.removeItem(STORAGE_KEY);
+  DATA = null;
+  document.getElementById("content").style.display = "none";
+  document.getElementById("header-actions").style.display = "none";
+  document.getElementById("header-legend").style.display = "none";
+  document.getElementById("header-sub").textContent = "Sube la plantilla Excel para visualizar el roadmap";
+  document.getElementById("empty-state").style.display = "block";
+  showStatus("", "");
+});
+
+/* ===== RESTORE FROM LOCALSTORAGE ===== */
+(function restore(){
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const parsed = JSON.parse(raw);
+    if (parsed?.data?.fases?.length){
+      DATA = parsed.data;
+      renderAll(parsed.data, parsed.meta);
+    }
+  } catch (e){ console.warn("No se pudo restaurar datos previos", e); }
+})();
+</script>
+</body>
+</html>
